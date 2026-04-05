@@ -1,56 +1,101 @@
+import { useState } from "react";
+
 const UploadBox = ({ onClose }) => {
+      const [title, setTitle] = useState("");
+      const [description, setDescription] = useState("");
+      const [image, setImage] = useState([]);
+
+      const uploadImage = async () => {
+            try {
+                  const url = "http://localhost:5000/api/images";
+
+                  //create the image uploader 
+                  const imageUpload = new FormData();
+                  imageUpload.append("title", title);
+                  imageUpload.append("description", description);
+                  imageUpload.append("image", image)
+                  const response = await fetch(url, {
+                        method: "POST",
+                        body: imageUpload
+                  });
+                  const data = await response.json();
+                  console.log(data);
+            } catch (e) {
+                  console.log(e);
+            }
+      };
+
       return (
-            <div
-                  className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
-                  onClick={onClose}
+            <div className="fixed inset-0 z-[60] flex items-center justify-center bg-slate-900/50 backdrop-blur-sm p-4"
+
             >
 
-                  {/* CLOSE BUTTON */}
-                  <button
-                        className="absolute top-6 right-6 text-white/60 hover:text-white transition"
-                        onClick={onClose}
-                  >
-                        ✕
-                  </button>
+                  <div className="relative w-full max-w-md bg-white rounded-2xl shadow-2xl p-6 space-y-5"
 
-                  {/* MODAL BOX */}
-                  <div
-                        className="w-full max-w-md max-h-[90vh] overflow-y-auto bg-[#141414] p-6 md:p-10 rounded-3xl shadow-2xl border border-white/10"
-                        onClick={(e) => e.stopPropagation()}
                   >
 
-                        <h2 className="text-3xl font-black text-white mb-8 tracking-tight">
-                              Upload <span className="text-red-600">Media</span>
-                        </h2>
-
-                        {/* Upload Area */}
-                        <div className="border-2 border-dashed border-white/10 rounded-2xl p-8 text-center hover:border-red-600 transition cursor-pointer">
-                              <p className="text-white font-semibold mb-2">Drop your file</p>
-                              <p className="text-white/40 text-xs mb-4">HD • 4K supported</p>
-                              <input type="file" className="w-full opacity-0 absolute inset-0 cursor-pointer" />
-                              <button className="text-red-500 text-sm font-bold">Browse</button>
-                        </div>
-
-                        {/* Inputs */}
-                        <div className="mt-6 flex flex-col gap-4">
-                              <input
-                                    type="text"
-                                    placeholder="Title"
-                                    className="bg-white/5 border border-white/10 p-3 rounded-xl text-white outline-none focus:ring-2 focus:ring-red-500"
-                              />
-
-                              <textarea
-                                    placeholder="Description"
-                                    rows="3"
-                                    className="bg-white/5 border border-white/10 p-3 rounded-xl text-white outline-none focus:ring-2 focus:ring-red-500 resize-none"
-                              ></textarea>
-                        </div>
-
-                        {/* Button */}
-                        <button className="w-full mt-6 bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-xl transition">
-                              Upload Now
+                        {/* CLOSE BUTTON */}
+                        <button
+                              onClick={(e) => {
+                                    e.stopPropagation();
+                                    onClose();
+                              }}
+                              className="absolute top-4 right-4 p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-full transition-colors z-10"
+                        >
+                              ✕
                         </button>
 
+                        {/* TITLE */}
+                        <div className="text-center">
+                              <h2 className="text-xl font-bold text-slate-800">Upload Image</h2>
+                              <p className="text-sm text-slate-500">PNG, JPG or GIF up to 10MB</p>
+                        </div>
+
+                        {/* UPLOAD AREA */}
+                        <label className="relative flex flex-col items-center justify-center w-full h-64 border-2 border-dashed border-slate-300 rounded-xl cursor-pointer hover:border-blue-500 hover:bg-blue-50 transition-all">
+
+                              <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                                    <p className="text-sm text-slate-600">
+                                          <span className="font-semibold">Click to upload</span> or drag and drop
+                                    </p>
+                              </div>
+
+                              <input
+                                    type="file"
+                                    className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                                    onChange={(e) => {
+                                          const file = e.target.files[0]
+                                          setImage(file)
+                                    }}
+                              />
+                        </label>
+
+                        {/* INPUTS */}
+                        <input
+                              type="text"
+                              placeholder="Title"
+                              value={title}
+                              onChange={(e) => setTitle(e.target.value)}
+                              className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl"
+                        />
+
+                        <textarea
+                              rows="3"
+                              placeholder="Description"
+                              value={description}
+                              onChange={(e) => setDescription(e.target.value)}
+                              className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl resize-none"
+                        ></textarea>
+
+                        {/* BUTTON */}
+                        <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl"
+                              onClick={() => {
+                                    uploadImage()
+                                    onClose();
+                              }}
+                        >
+                              Save Details
+                        </button>
                   </div>
             </div>
       );
