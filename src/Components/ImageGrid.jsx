@@ -17,12 +17,16 @@ const ImageGrid = () => {
                   })
                   const dat = await response.json()
                   setTotalImages(dat.total);
-                  setData(dat.data);
+                  setTotalImages(dat?.total || 0);
+                  setData(dat?.data || []);
+
 
             } catch (e) {
                   console.log(e)
             }
       }
+
+
 
       return (
             /* Background set to Netflix deep black */
@@ -41,6 +45,19 @@ const ImageGrid = () => {
                         {data.map((item) => (
                               <ImageCard key={item._id} item={item} />
                         ))}
+                  </div>
+                  <div className="flex justify-end gap-3 mt-6 max-w-full mx-auto">
+                        {
+                              ["prev", "next"].map((val) => (
+                                    <button
+                                          key={val}
+                                          type="button"
+                                          className="bg-gray-200 px-4 py-2 uppercase font-bold tracking-wider rounded-lg cursor-pointer"
+                                    >
+                                          {val}
+                                    </button>
+                              ))
+                        }
                   </div>
             </div>
       );

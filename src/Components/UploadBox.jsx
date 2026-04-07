@@ -1,38 +1,39 @@
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 const UploadBox = ({ onClose }) => {
       const [title, setTitle] = useState("");
       const [description, setDescription] = useState("");
-      const [image, setImage] = useState([]);
+      const [image, setImage] = useState(null);
 
       const uploadImage = async () => {
             try {
                   const url = "http://localhost:5000/api/images";
 
-                  //create the image uploader 
                   const imageUpload = new FormData();
                   imageUpload.append("title", title);
                   imageUpload.append("description", description);
-                  imageUpload.append("image", image)
+                  imageUpload.append("image", image);
+
                   const response = await fetch(url, {
                         method: "POST",
                         body: imageUpload
                   });
-                  const data = await response.json();
-                  console.log(data);
+
+                  if (response.success) {
+                        toast.success("SucessFully Uploaded")
+                  } else {
+                        toast.error("Something Went Wrong")
+                  }
             } catch (e) {
                   console.log(e);
             }
       };
 
       return (
-            <div className="fixed inset-0 z-[60] flex items-center justify-center bg-slate-900/50 backdrop-blur-sm p-4"
+            <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
 
-            >
-
-                  <div className="relative w-full max-w-md bg-white rounded-2xl shadow-2xl p-6 space-y-5"
-
-                  >
+                  <div className="relative w-full max-w-md bg-black text-white rounded-2xl shadow-2xl p-6 space-y-5">
 
                         {/* CLOSE BUTTON */}
                         <button
@@ -40,22 +41,22 @@ const UploadBox = ({ onClose }) => {
                                     e.stopPropagation();
                                     onClose();
                               }}
-                              className="absolute top-4 right-4 p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-full transition-colors z-10"
+                              className="absolute top-4 right-4 p-2 text-slate-300 hover:text-white hover:bg-slate-700 rounded-full transition-colors z-20"
                         >
                               ✕
                         </button>
 
                         {/* TITLE */}
                         <div className="text-center">
-                              <h2 className="text-xl font-bold text-slate-800">Upload Image</h2>
-                              <p className="text-sm text-slate-500">PNG, JPG or GIF up to 10MB</p>
+                              <h2 className="text-xl font-bold text-white">Upload Image</h2>
+                              <p className="text-sm text-slate-400">PNG, JPG or GIF up to 10MB</p>
                         </div>
 
                         {/* UPLOAD AREA */}
-                        <label className="relative flex flex-col items-center justify-center w-full h-64 border-2 border-dashed border-slate-300 rounded-xl cursor-pointer hover:border-blue-500 hover:bg-blue-50 transition-all">
+                        <label className="relative flex flex-col items-center justify-center w-full h-64 border-2 border-dashed border-slate-600 rounded-xl cursor-pointer hover:border-blue-500 hover:bg-slate-800 transition-all">
 
                               <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                                    <p className="text-sm text-slate-600">
+                                    <p className="text-sm text-slate-300 text-center px-4">
                                           <span className="font-semibold">Click to upload</span> or drag and drop
                                     </p>
                               </div>
@@ -64,8 +65,8 @@ const UploadBox = ({ onClose }) => {
                                     type="file"
                                     className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                                     onChange={(e) => {
-                                          const file = e.target.files[0]
-                                          setImage(file)
+                                          const file = e.target.files[0];
+                                          setImage(file);
                                     }}
                               />
                         </label>
@@ -76,7 +77,7 @@ const UploadBox = ({ onClose }) => {
                               placeholder="Title"
                               value={title}
                               onChange={(e) => setTitle(e.target.value)}
-                              className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl"
+                              className="w-full px-4 py-3 bg-slate-800 border border-slate-700 text-white rounded-xl placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
 
                         <textarea
@@ -84,13 +85,14 @@ const UploadBox = ({ onClose }) => {
                               placeholder="Description"
                               value={description}
                               onChange={(e) => setDescription(e.target.value)}
-                              className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl resize-none"
+                              className="w-full px-4 py-3 bg-slate-800 border border-slate-700 text-white rounded-xl resize-none placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         ></textarea>
 
                         {/* BUTTON */}
-                        <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl"
+                        <button
+                              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl transition"
                               onClick={() => {
-                                    uploadImage()
+                                    uploadImage();
                                     onClose();
                               }}
                         >
