@@ -20,7 +20,7 @@ const ImageCard = ({ item }) => {
 
       useEffect(() => {
             if (openFullImage) {
-                  document.body.style.overflow === "hidden"
+                  document.body.style.overflow = "hidden"
             } else {
                   document.body.style.overflow = "scroll"
             }
