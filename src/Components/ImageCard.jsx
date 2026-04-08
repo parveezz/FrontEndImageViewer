@@ -18,6 +18,14 @@ const ImageCard = ({ item }) => {
             }
       }
 
+      useEffect(() => {
+            if (openFullImage) {
+                  document.body.style.overflow === "hidden"
+            } else {
+                  document.body.style.overflow = "scroll"
+            }
+      }, [openFullImage])
+
       return (
             <>
                   <div className="relative group aspect-[3/4] rounded-sm overflow-hidden transition-all duration-500 hover:scale-105 hover:z-50 cursor-pointer shadow-2xl"

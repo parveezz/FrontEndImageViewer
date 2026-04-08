@@ -1,46 +1,69 @@
+import { HiHeart, HiDownload } from "react-icons/hi";
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+
 const FullSizeModel = ({ onClose, data }) => {
-
-      console.log(data._id || null)
       return (
-            <div className="fixed inset-0 z-[9999] bg-black/90 backdrop-blur-md flex items-center justify-center"
+            <>
+                  <div className="fixed inset-0 z-999 bg-black/80 backdrop-blur-md flex flex-col">
 
-            >
+                        {/* CLOSE BUTTON */}
+                        <button
+                              className="absolute top-6 right-10 text-white text-3xl z-10 hover:bg-white hover:text-black rounded-full p-2 transition"
+                              onClick={onClose}
+                        >
+                              ✕
+                        </button>
 
-                  {/* CLOSE BUTTON */}
-                  <button className="absolute top-6 right-10 text-white text-2xl z-10 hover:bg-gray-200 rounded-full p-1 hover:text-black"
-                        onClick={() => {
-                              onClose();
-                        }}
-                  >
-                        ✕
-                  </button>
+                        {/* MAIN CONTENT */}
+                        <div className="flex-1 flex items-center justify-center relative px-6">
 
-                  {/* IMAGE */}
-                  <div className="w-full h-[95vh] m-6 ">
-                        <section className=" h-full">
+                              {/* LEFT ARROW */}
+                              <FiChevronLeft className="absolute left-6 top-1/2 -translate-y-1/2 text-white text-6xl cursor-pointer hover:scale-125 transition duration-200" />
+
+                              {/* IMAGE */}
                               <div className="flex items-center justify-center">
                                     <img
-                                          // src="/favicon.svg"
                                           src={`http://localhost:5000${data.imageUrl}`}
                                           alt="preview"
-                                          className="h-[85vh] max-w-[90vw] object-cover "
+                                          className="max-h-[80vh] max-w-full object-cover "
                                     />
                               </div>
-                              <div className="flex h-[10vh] items-center justify-between px-3 inset-0 z-[9999] bg-black/80">
-                                    <span>
-                                          <p className="text-white font-medium capitalize tracking-wider">{data.title}</p>
-                                          <p className="text-white font-medium capitalize tracking-wider"> {data.description}</p>
-                                    </span>
-                                    <span className="flex items-center justify-end gap-3">
-                                          <button type="button" className="bg-gray-50 p-2 rounded-xl font-extrabold capitalize hover:underline">favorite</button>
-                                          <button type="button" className="bg-gray-50 p-2 rounded-xl font-extrabold capitalize hover:underline">Download</button>
-                                    </span>
+
+                              {/* RIGHT ARROW */}
+                              <FiChevronRight className="absolute right-6 top-1/2 -translate-y-1/2 text-white text-6xl cursor-pointer hover:scale-125 transition duration-200" />
+                        </div>
+
+                        {/* BOTTOM TEXT SECTION */}
+                        <div className="h-[12vh] bg-black/80 flex items-center justify-between px-6">
+
+                              {/* TEXT */}
+                              <div>
+                                    <p className="text-white text-lg font-semibold tracking-wide">
+                                          {data.title}
+                                    </p>
+                                    <p className="text-gray-300 text-sm mt-1">
+                                          {data.description}
+                                    </p>
                               </div>
-                        </section>
 
+                              {/* ACTION BUTTONS */}
+                              <div className="flex gap-4">
+                                    {/* Favorite Button: Solid White with a Heart */}
+                                    <button className="group flex items-center gap-2 bg-white text-black px-6 py-2.5 rounded-xl font-bold shadow-lg hover:bg-red-50 hover:text-red-600 transition-all duration-300 active:scale-95">
+                                          <HiHeart className="text-xl group-hover:scale-125 transition-transform duration-300" />
+                                          <span>Favorite</span>
+                                    </button>
+
+                                    {/* Download Button: Glassmorphism Style */}
+                                    <button className="flex items-center gap-2 bg-white/10 backdrop-blur-md text-white border border-white/20 px-6 py-2.5 rounded-xl font-bold hover:bg-white/20 transition-all duration-300 active:scale-95">
+                                          <HiDownload className="text-xl" />
+                                          <span>Download</span>
+                                    </button>
+                              </div>
+
+                        </div>
                   </div>
-
-            </div>
+            </>
       );
 };
 

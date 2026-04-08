@@ -3,6 +3,8 @@ import ImageCard from "./ImageCard";
 
 const ImageGrid = () => {
       const [totalImages, setTotalImages] = useState(null);
+      const [currentPage, setCurrentPage] = useState(1);
+      const [totalpages, setTotalPages] = useState(0)
       const [data, setData] = useState([]);
 
       useEffect(() => {
@@ -11,7 +13,7 @@ const ImageGrid = () => {
 
       const getAllImages = async () => {
             try {
-                  const url = "http://localhost:5000/api/images"
+                  const url = `http://localhost:5000/api/images`
                   const response = await fetch(url, {
                         method: "GET"
                   })
@@ -19,8 +21,7 @@ const ImageGrid = () => {
                   setTotalImages(dat.total);
                   setTotalImages(dat?.total || 0);
                   setData(dat?.data || []);
-
-
+                  setTotalPages(data.pages || 0)
             } catch (e) {
                   console.log(e)
             }
@@ -52,7 +53,16 @@ const ImageGrid = () => {
                                     <button
                                           key={val}
                                           type="button"
-                                          className="bg-gray-200 px-4 py-2 uppercase font-bold tracking-wider rounded-lg cursor-pointer"
+                                          className="bg-gray-200 px-4 py-2 uppercase font-bold tracking-wider rounded-lg cursor-pointer hover:bg-gray-500 disabled:opacity-50"
+                                          onClick={() => {
+                                                setCurrentPage((prev) => {
+                                                      if (val === "next") {
+                                                            return prev < totalpages ? prev + 1 : prev;
+                                                      } else {
+                                                            return prev > 1 ? prev - 1 : prev;
+                                                      }
+                                                });
+                                          }}
                                     >
                                           {val}
                                     </button>

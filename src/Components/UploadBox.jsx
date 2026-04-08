@@ -6,6 +6,18 @@ const UploadBox = ({ onClose }) => {
       const [description, setDescription] = useState("");
       const [image, setImage] = useState(null);
 
+
+      const validation = () => {
+            if (title.length === 0) {
+                  toast.error("Enter the Missing Feild");
+            }
+            if (description.length === 0) {
+                  toast.error("Enter the Description")
+            }
+      }
+
+      validation()
+
       const uploadImage = async () => {
             try {
                   const url = "http://localhost:5000/api/images";
@@ -93,7 +105,12 @@ const UploadBox = ({ onClose }) => {
                               className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl transition"
                               onClick={() => {
                                     uploadImage();
-                                    onClose();
+                                    onClose()
+                              }}
+                              onKeyDown={(e) => {
+                                    if (e.key === "Enter") {
+                                          return uploadImage();
+                                    }
                               }}
                         >
                               Save Details
