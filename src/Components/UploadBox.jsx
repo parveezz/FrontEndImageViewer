@@ -43,9 +43,13 @@ const UploadBox = ({ onClose }) => {
       };
 
       return (
-            <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
+            <div className="fixed inset-0 z-[999] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
 
-                  <div className="relative w-full max-w-md bg-black text-white rounded-2xl shadow-2xl p-6 space-y-5">
+                  <div className="relative w-full max-w-md bg-black text-white rounded-2xl shadow-2xl p-6 space-y-5"
+                        onClick={() => {
+                              onClose();
+                        }}
+                  >
 
                         {/* CLOSE BUTTON */}
                         <button

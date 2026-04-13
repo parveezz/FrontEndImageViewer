@@ -1,7 +1,9 @@
 import { HiHeart, HiDownload } from "react-icons/hi";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
-const FullSizeModel = ({ onClose, data }) => {
+const FullSizeModel = ({ data, onClose }) => {
+      console.log(data)
+      const [id, title, imageUrl, description] = data;
       return (
             <>
                   <div className="fixed inset-0 z-999 bg-black/80 backdrop-blur-md flex flex-col">
@@ -23,7 +25,7 @@ const FullSizeModel = ({ onClose, data }) => {
                               {/* IMAGE */}
                               <div className="flex items-center justify-center">
                                     <img
-                                          src={`http://localhost:5000${data.imageUrl}`}
+                                          src={`http://localhost:5000${imageUrl}`}
                                           alt="preview"
                                           className="max-h-[80vh] max-w-full object-cover "
                                     />
@@ -39,10 +41,10 @@ const FullSizeModel = ({ onClose, data }) => {
                               {/* TEXT */}
                               <div>
                                     <p className="text-white text-lg font-semibold tracking-wide">
-                                          {data.title}
+                                          {title}
                                     </p>
                                     <p className="text-gray-300 text-sm mt-1">
-                                          {data.description}
+                                          {description}
                                     </p>
                               </div>
 
@@ -55,8 +57,12 @@ const FullSizeModel = ({ onClose, data }) => {
                                     </button>
 
                                     {/* Download Button: Glassmorphism Style */}
-                                    <button className="flex items-center gap-2 bg-white/10 backdrop-blur-md text-white border border-white/20 px-6 py-2.5 rounded-xl font-bold hover:bg-white/20 transition-all duration-300 active:scale-95">
-                                          <HiDownload className="text-xl" />
+                                    <button className="flex items-center gap-2 bg-white/10 backdrop-blur-md text-white border border-white/20 px-6 py-2.5 rounded-xl font-bold hover:bg-white/20 transition-all duration-300 active:scale-95"
+
+                                          title={id}>
+                                          <HiDownload className="text-xl"
+
+                                          />
                                           <span>Download</span>
                                     </button>
                               </div>

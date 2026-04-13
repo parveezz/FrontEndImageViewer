@@ -5,7 +5,6 @@ import { FiSearch } from "react-icons/fi";
 
 const Navbar = () => {
       const [isUploadOpen, setIsUploadOpen] = useState(false);
-      const [storeInput, setStoreInput] = useState("")
 
       return (
             <>
@@ -23,7 +22,7 @@ const Navbar = () => {
                focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 
                transition-all duration-200"
 
-                                                onChange={(e) => { setStoreInput(e.target.value) }}
+
                                           />
 
                                           {/* Search Icon */}
