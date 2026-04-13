@@ -6,6 +6,7 @@ import Loader from "./Loader";
 const ImageCard = () => {
       const [openFullImage, setOpenFullImage] = useState(false);
       const [data, setData] = useState([]);
+      const [storeObject, setStoreObject] = useState(null);
 
       //stoping the scrolling effect after opening the full size model
       useEffect(() => {
@@ -69,7 +70,10 @@ const ImageCard = () => {
                                                       <FaHeart size={14} />
                                                 </button>
                                                 <button className="bg-black/40 backdrop-blur-md p-2.5 rounded-sm text-white hover:bg-white/20 transition-colors cursor-pointer"
-                                                      onClick={() => { setOpenFullImage(true) }}
+                                                      onClick={() => {
+                                                            setOpenFullImage(true)
+                                                            setStoreObject(item)
+                                                      }}
                                                 >
                                                       <FaExpandAlt size={14} />
 
@@ -110,7 +114,7 @@ const ImageCard = () => {
                   }
 
                   {openFullImage && <FullSizeModel
-
+                        data={storeObject}
                         onClose={() => { setOpenFullImage(false) }}
                   />}
             </>
