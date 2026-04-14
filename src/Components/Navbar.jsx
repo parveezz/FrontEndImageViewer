@@ -3,8 +3,10 @@ import UploadBox from "./UploadBox";
 import { FaUpload } from "react-icons/fa";
 import { FiSearch } from "react-icons/fi";
 
-const Navbar = () => {
+const Navbar = ({ getInputValue }) => {
+      //to open the upload page
       const [isUploadOpen, setIsUploadOpen] = useState(false);
+      //store the inputValue
 
       useEffect(() => {
             if (isUploadOpen) {
@@ -29,7 +31,9 @@ const Navbar = () => {
                                                 className="w-[300px] pl-3 pr-11 py-2 text-md font-medium rounded-xl border border-gray-200 bg-white 
                focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 
                transition-all duration-200"
-
+                                                onChange={(e) => {
+                                                      getInputValue(e.target.value)
+                                                }}
 
                                           />
 
@@ -49,6 +53,7 @@ const Navbar = () => {
                   {isUploadOpen && (
                         <UploadBox onClose={() => setIsUploadOpen(false)} />
                   )}
+
             </>
       );
 };

@@ -4,10 +4,12 @@ import FullSizeModel from "./FullSizeModel";
 import Loader from "./Loader";
 import { baseUrl } from "../../baseurl";
 
-const ImageCard = () => {
+const ImageCard = ({ filterText }) => {
       const [openFullImage, setOpenFullImage] = useState(false);
       const [data, setData] = useState([]);
       const [storeObject, setStoreObject] = useState(null);
+
+
 
       //stoping the scrolling effect after opening the full size model
       useEffect(() => {
@@ -73,6 +75,10 @@ const ImageCard = () => {
                   console.error("Download failed:", error);
             }
       };
+
+
+      console.log(filterText)
+
 
 
       return (
