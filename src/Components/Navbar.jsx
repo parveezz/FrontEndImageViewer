@@ -1,10 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import UploadBox from "./UploadBox";
 import { FaUpload } from "react-icons/fa";
 import { FiSearch } from "react-icons/fi";
 
 const Navbar = () => {
       const [isUploadOpen, setIsUploadOpen] = useState(false);
+
+      useEffect(() => {
+            if (isUploadOpen) {
+                  document.body.style.overflow = "hidden";
+            } else {
+                  document.body.style.overflow = "scroll"
+            }
+      }, [isUploadOpen])
 
       return (
             <>

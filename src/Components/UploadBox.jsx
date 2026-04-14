@@ -1,5 +1,6 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { baseUrl } from "../../baseurl";
 
 const UploadBox = ({ onClose }) => {
       const [title, setTitle] = useState("");
@@ -20,7 +21,7 @@ const UploadBox = ({ onClose }) => {
 
       const uploadImage = async () => {
             try {
-                  const url = "http://localhost:5000/api/images";
+                  const url = `${baseUrl}/api/images`;
 
                   const imageUpload = new FormData();
                   imageUpload.append("title", title);
@@ -46,9 +47,7 @@ const UploadBox = ({ onClose }) => {
             <div className="fixed inset-0 z-[999] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
 
                   <div className="relative w-full max-w-md bg-black text-white rounded-2xl shadow-2xl p-6 space-y-5"
-                        onClick={() => {
-                              onClose();
-                        }}
+
                   >
 
                         {/* CLOSE BUTTON */}

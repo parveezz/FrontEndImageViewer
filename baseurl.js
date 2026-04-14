@@ -1,0 +1,1 @@
+export const baseUrl = 'https://image-viewer-1.onrender.com'
