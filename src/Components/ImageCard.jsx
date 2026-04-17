@@ -90,7 +90,7 @@ const ImageCard = ({ filterText }) => {
 
                         data.map((item) => {
                               return (
-                                    <div className="relative group aspect-[3/4] rounded-sm overflow-hidden transition-all duration-500 hover:scale-105 hover:z-50 cursor-pointer shadow-2xl"
+                                    <div className="relative group aspect-[3/4] rounded-sm overflow-hidden transition-all duration-500 hover:scale-105 hover:z-30 cursor-pointer shadow-2xl"
                                           key={item._id}
                                     >
 
@@ -117,15 +117,6 @@ const ImageCard = ({ filterText }) => {
                                                       <FaExpandAlt size={14} />
 
                                                 </button>
-
-                                                <button className="bg-black/40 backdrop-blur-md p-2.5 rounded-sm text-white hover:bg-white/20 transition-colors cursor-pointer"
-
-                                                >
-                                                      <FaTrash size={15} />
-                                                </button>
-
-
-
                                           </div>
 
                                           <div className="absolute inset-x-0 bottom-0 p-5 text-white opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-4 group-hover:translate-y-0">

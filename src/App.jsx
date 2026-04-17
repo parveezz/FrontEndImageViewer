@@ -1,12 +1,7 @@
-import Home from "./Pages/Home"
-
+import Routing from "./Routing/routing"
 
 const App = () => {
-  return (
-    <div>
-      <Home />
-    </div>
-  )
+  return <Routing />
 }
 
 export default App
