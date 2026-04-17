@@ -20,8 +20,11 @@ const Navbar = ({ getInputValue }) => {
             <>
                   <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100 px-6 py-4 z-999">
                         <div className="max-w-7xl mx-auto flex justify-between items-center">
-                              <h1 className="text-2xl font-black text-slate-800">
-                                    Image<span className="text-blue-600">Viewer</span>
+                              <h1 className="text-2xl font-black text-slate-800 font-[Dancing_Script]">
+                                    Image
+                                    <span className="text-blue-600 ">
+                                          Viewer
+                                    </span>
                               </h1>
                               <div className="flex items-center justify-end gap-3">
                                     <span className="relative w-full flex items-center justify-between">
