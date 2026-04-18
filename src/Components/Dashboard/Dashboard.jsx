@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import UploadBox from "../UploadBox";
 import LoadingState from "./LoadingState";
 import EditImage from "./EditImage";
+import toast from "react-hot-toast";
 
 const Dashboard = () => {
       const [apiData, setApiData] = useState([]);
@@ -16,23 +17,25 @@ const Dashboard = () => {
       const [openEdit, setOpenEdit] = useState(false);
       const [selectedImage, setSelectedImage] = useState(null);
 
-      const navigate = useNavigate();
 
+      const navigate = useNavigate();
+      // to get the images
+      const getAllImages = async () => {
+            setLoading(true);
+            try {
+                  const response = await fetch(`${baseUrl}/api/images?page=${currentPage}`);
+                  const data = await response.json();
+                  setApiData(data?.data || []);
+                  setTotalImages(data?.total || 0);
+                  setTotalPages(data?.pages || 0);
+            } catch (err) {
+                  console.log(err);
+            } finally {
+                  setLoading(false);
+            }
+      };
       useEffect(() => {
-            const getAllImages = async () => {
-                  setLoading(true);
-                  try {
-                        const response = await fetch(`${baseUrl}/api/images?page=${currentPage}`);
-                        const data = await response.json();
-                        setApiData(data?.data || []);
-                        setTotalImages(data?.total || 0);
-                        setTotalPages(data?.pages || 0);
-                  } catch (err) {
-                        console.log(err);
-                  } finally {
-                        setLoading(false);
-                  }
-            };
+
             getAllImages();
       }, [currentPage]);
 
@@ -43,6 +46,21 @@ const Dashboard = () => {
                   document.body.style.overflow = "auto";
             }
       }, [isUploadOpen, selectedImage]);
+
+      //to delte the images 
+      const deleteImage = async (id) => {
+            try {
+                  const url = `${baseUrl}/api/images/${id}`
+                  const fetching = await fetch(url, {
+                        method: "DELETE"
+                  });
+                  const respone = await fetching.json()
+                  toast.success(respone.message)
+            } catch (e) {
+                  console.log(e)
+            }
+      }
+
 
       return (
             <>
@@ -153,7 +171,11 @@ const Dashboard = () => {
                                                                                     <Edit3 className="w-3.5 h-3.5" />
                                                                                     <span className="text-[10px] font-bold uppercase tracking-wider">Edit</span>
                                                                               </button>
-                                                                              <button className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-red-50 text-red-600 hover:bg-red-600 hover:text-white transition-all">
+                                                                              <button className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-red-50 text-red-600 hover:bg-red-600 hover:text-white transition-all"
+                                                                                    onClick={() => {
+                                                                                          deleteImage(item._id)
+                                                                                    }}
+                                                                              >
                                                                                     <Trash2 className="w-3.5 h-3.5" />
                                                                                     <span className="text-[10px] font-bold uppercase tracking-wider">Delete</span>
                                                                               </button>
@@ -208,7 +230,8 @@ const Dashboard = () => {
                         </div>
                   </div>
 
-                  {isUploadOpen && <UploadBox onClose={() => setIsUploadOpen(false)} />}
+                  {isUploadOpen && <UploadBox onClose={() => setIsUploadOpen(false)}
+                        updateApi={() => { getAllImages() }} />}
                   {openEdit && (
                         <EditImage
                               data={selectedImage}

@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 import { Upload, X, ImageIcon, FileText, Type } from "lucide-react"; // Added for better icons
 import { baseUrl } from "../../baseurl";
 
-const UploadBox = ({ onClose }) => {
+const UploadBox = ({ onClose, updateApi }) => {
       const [title, setTitle] = useState("");
       const [description, setDescription] = useState("");
       const [image, setImage] = useState(null);
@@ -126,7 +126,11 @@ const UploadBox = ({ onClose }) => {
                                           Cancel
                                     </button>
                                     <button
-                                          onClick={uploadImage}
+                                          onClick={() => {
+                                                if (uploadImage()) {
+                                                      updateApi();
+                                                }
+                                          }}
                                           className="flex-[2] bg-red-600 hover:bg-red-700 text-white font-black py-4 rounded-xl transition-all shadow-lg shadow-red-200 active:scale-95"
                                     >
                                           Confirm Upload

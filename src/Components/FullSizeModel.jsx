@@ -1,5 +1,6 @@
 import { HiHeart, HiDownload } from "react-icons/hi";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import { downloadImage } from "../utils/downloadImage";
 
 const FullSizeModel = ({ data, onClose }) => {
 
@@ -57,8 +58,8 @@ const FullSizeModel = ({ data, onClose }) => {
 
                                     {/* Download Button: Glassmorphism Style */}
                                     <button className="flex items-center gap-2 bg-white/10 backdrop-blur-md text-white border border-white/20 px-6 py-2.5 rounded-xl font-bold hover:bg-white/20 transition-all duration-300 active:scale-95"
-
-                                          title={data._id}>
+                                          onClick={() => { downloadImage(data) }}
+                                    >
                                           <HiDownload className="text-xl"
 
                                           />
