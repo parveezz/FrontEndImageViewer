@@ -1,4 +1,4 @@
-import Routing from "./Routing/routing"
+import Routing from "./Routing/Routing.jsx";
 import { Toaster } from "react-hot-toast";
 
 const App = () => {
