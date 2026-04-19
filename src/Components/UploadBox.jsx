@@ -1,7 +1,7 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { Upload, X, ImageIcon, FileText, Type } from "lucide-react"; // Added for better icons
-import { baseUrl } from "../../baseurl";
+import { baseUrl } from "../baseUrl";
 
 const UploadBox = ({ onClose, updateApi }) => {
       const [title, setTitle] = useState("");

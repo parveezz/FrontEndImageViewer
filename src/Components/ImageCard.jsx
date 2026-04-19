@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { FaHeart, FaDownload, FaExpandAlt } from "react-icons/fa";
 import FullSizeModel from "./FullSizeModel";
-import { baseUrl } from "../../baseurl";
+import { baseUrl } from "../baseUrl";
 import { downloadImage } from "../utils/downloadImage";
 
 const ImageCard = ({ item }) => {

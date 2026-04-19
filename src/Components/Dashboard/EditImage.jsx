@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { X, Save, Type, AlignLeft } from "lucide-react";
-import { baseUrl } from "../../../baseurl";
+import { baseUrl } from "../../baseUrl";
 
 const EditImage = ({ data, onClose }) => {
       const [title, setTitle] = useState(data?.title || "");

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Edit3, Trash2, Image as ImageIcon, Plus, Files, ArrowLeft, ChevronLeft, ChevronRight } from "lucide-react";
-import { baseUrl } from "../../../baseurl";
+import { baseUrl } from "../../baseUrl";
 import { useNavigate } from "react-router-dom";
 import UploadBox from "../UploadBox";
 import LoadingState from "./LoadingState";

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ImageCard from "./ImageCard";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { baseUrl } from "../../baseurl";
+import { baseUrl } from "../baseUrl";
 
 const ImageGrid = ({ sendInputValue }) => {
       const [images, setImages] = useState([]);
