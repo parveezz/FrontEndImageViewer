@@ -19,6 +19,11 @@ const Dashboard = () => {
 
 
       const navigate = useNavigate();
+
+      const handleLogout = () => {
+            localStorage.removeItem("token");
+            navigate("/login");
+      };
       // to get the images
       const getAllImages = async () => {
             setLoading(true);
@@ -50,16 +55,33 @@ const Dashboard = () => {
       //to delte the images 
       const deleteImage = async (id) => {
             try {
-                  const url = `${baseUrl}/api/images/${id}`
+                  const token = localStorage.getItem("token");
+
+                  const url = `${baseUrl}/api/images/${id}`;
+
                   const fetching = await fetch(url, {
-                        method: "DELETE"
+                        method: "DELETE",
+                        headers: {
+                              Authorization: `Bearer ${token}`,
+                        },
                   });
-                  const respone = await fetching.json()
-                  toast.success(respone.message)
+
+                  const response = await fetching.json();
+
+                  if (fetching.ok) {
+                        toast.success(response.message);
+
+                        // 🔥 update UI instantly
+                        setApiData((prev) => prev.filter((img) => img._id !== id));
+
+                  } else {
+                        toast.error(response.message);
+                  }
+
             } catch (e) {
-                  console.log(e)
+                  console.log(e);
             }
-      }
+      };
 
 
       return (
@@ -82,36 +104,56 @@ const Dashboard = () => {
                                     </div>
                               </div>
 
-                              <div className="flex items-center gap-2 bg-white p-1 rounded-2xl shadow-sm border border-slate-100">
-                                    <div className="hidden sm:flex items-center gap-3 px-4 py-2 border-r border-slate-100">
-                                          <div className="p-2 bg-red-50 rounded-lg">
-                                                <ImageIcon className="w-4 h-4 text-red-600" />
+                              <div className="flex items-center justify-between">
+
+                                    {/* LEFT SIDE: Stats + Upload */}
+                                    <div className="flex items-center gap-2 bg-white p-1 rounded-2xl shadow-sm border border-slate-100">
+
+                                          {/* Stats */}
+                                          <div className="hidden sm:flex items-center gap-3 px-4 py-2 border-r border-slate-100">
+                                                <div className="p-2 bg-red-50 rounded-lg">
+                                                      <ImageIcon className="w-4 h-4 text-red-600" />
+                                                </div>
+                                                <div>
+                                                      <p className="text-[10px] uppercase font-bold text-slate-400 leading-none">Images</p>
+                                                      <p className="text-sm font-black text-slate-800">{totalImages}</p>
+                                                </div>
                                           </div>
-                                          <div>
-                                                <p className="text-[10px] uppercase font-bold text-slate-400 leading-none">Images</p>
-                                                <p className="text-sm font-black text-slate-800">{totalImages}</p>
+
+                                          <div className="hidden sm:flex items-center gap-3 px-4 py-2 border-r border-slate-100">
+                                                <div className="p-2 bg-blue-50 rounded-lg">
+                                                      <Files className="w-4 h-4 text-blue-600" />
+                                                </div>
+                                                <div>
+                                                      <p className="text-[10px] uppercase font-bold text-slate-400 leading-none">Pages</p>
+                                                      <p className="text-sm font-black text-slate-800">{totalPages}</p>
+                                                </div>
                                           </div>
+
+                                          {/* Upload */}
+                                          <div className="flex items-center gap-3 pl-2">
+                                                <button
+                                                      onClick={() => setIsUploadOpen(true)}
+                                                      className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-5 py-2.5 rounded-xl font-bold transition-all shadow-lg shadow-red-200 active:scale-95 text-sm"
+                                                >
+                                                      <Plus className="w-4 h-4" />
+                                                      <span className="hidden lg:inline">Upload New</span>
+                                                </button>
+                                          </div>
+
                                     </div>
 
-                                    <div className="hidden sm:flex items-center gap-3 px-4 py-2 border-r border-slate-100">
-                                          <div className="p-2 bg-blue-50 rounded-lg">
-                                                <Files className="w-4 h-4 text-blue-600" />
-                                          </div>
-                                          <div>
-                                                <p className="text-[10px] uppercase font-bold text-slate-400 leading-none">Pages</p>
-                                                <p className="text-sm font-black text-slate-800">{totalPages}</p>
-                                          </div>
-                                    </div>
-
-                                    <div className="flex items-center gap-3 pl-2">
+                                    {/* RIGHT SIDE: Logout (separate div) */}
+                                    <div className="flex items-center ml-3">
                                           <button
-                                                className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-5 py-2.5 rounded-xl font-bold transition-all shadow-lg shadow-red-200 active:scale-95 text-sm"
-                                                onClick={() => setIsUploadOpen(true)}
+                                                onClick={handleLogout}
+                                                className="px-4 py-4 rounded-xl bg-white border border-slate-200 text-slate-700 
+      hover:bg-red-500 hover:text-white hover:border-red-500 transition-all text-sm font-medium shadow-sm"
                                           >
-                                                <Plus className="w-4 h-4" />
-                                                <span className="hidden lg:inline">Upload New</span>
+                                                🚪 Sign Out
                                           </button>
                                     </div>
+
                               </div>
                         </div>
 
