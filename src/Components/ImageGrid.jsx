@@ -8,6 +8,7 @@ const ImageGrid = ({ sendInputValue }) => {
       const [currentPage, setCurrentPage] = useState(1);
       const [totalPages, setTotalPages] = useState(1);
       const [loading, setLoading] = useState(true);
+      const [filter, setFilter] = useState("all");
 
       // 🔥 Fetch images
       const getImages = async () => {
@@ -27,7 +28,7 @@ const ImageGrid = ({ sendInputValue }) => {
             }
       };
 
-      // 🔁 Fetch on page change
+      // 🔁 Fetch when page changes
       useEffect(() => {
             getImages();
       }, [currentPage]);
@@ -37,15 +38,47 @@ const ImageGrid = ({ sendInputValue }) => {
             setCurrentPage(1);
       }, [sendInputValue]);
 
-      // 🔍 Filter images safely
+      // 🔄 Reset page when filter changes
+      useEffect(() => {
+            setCurrentPage(1);
+      }, [filter]);
+
+      // 🔍 Search filter
       const filteredImages = images.filter((img) =>
             img.title
                   .toLowerCase()
                   .includes((sendInputValue || "").toLowerCase())
       );
 
+      // 🔥 Sorting logic (clean)
+      let finalImages = [...filteredImages].sort((a, b) => {
+            if (filter === "az") return a.title.localeCompare(b.title);
+            if (filter === "za") return b.title.localeCompare(a.title);
+            if (filter === "new")
+                  return new Date(b.createdAt) - new Date(a.createdAt);
+            if (filter === "old")
+                  return new Date(a.createdAt) - new Date(b.createdAt);
+            return 0;
+      });
+
       return (
             <div className="min-h-screen px-4">
+
+                  {/* 🔽 Filter UI */}
+                  <div className="flex justify-end items-center gap-2 mb-4">
+                        <span className="text-sm text-gray-500">Sort:</span>
+                        <select
+                              value={filter}
+                              onChange={(e) => setFilter(e.target.value)}
+                              className="px-3 py-2 border rounded-lg text-sm"
+                        >
+                              <option value="all">All</option>
+                              <option value="az">A - Z</option>
+                              <option value="za">Z - A</option>
+                              <option value="new">Newest</option>
+                              <option value="old">Oldest</option>
+                        </select>
+                  </div>
 
                   {/* GRID */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w mx-auto">
@@ -54,12 +87,12 @@ const ImageGrid = ({ sendInputValue }) => {
                               <p className="col-span-full text-center text-gray-400">
                                     Loading...
                               </p>
-                        ) : filteredImages.length === 0 ? (
+                        ) : finalImages.length === 0 ? (
                               <p className="col-span-full text-center text-gray-500">
                                     No images found
                               </p>
                         ) : (
-                              filteredImages.map((item) => (
+                              finalImages.map((item) => (
                                     <ImageCard key={item._id} item={item} />
                               ))
                         )}
@@ -80,7 +113,7 @@ const ImageGrid = ({ sendInputValue }) => {
                               <ChevronLeft className="w-4 h-4" />
                         </button>
 
-                        {/* Page Numbers */}
+                        {/* Numbers */}
                         {[...Array(totalPages)].map((_, i) => (
                               <button
                                     key={i}
