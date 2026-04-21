@@ -1,13 +1,8 @@
-import Routing from "./Routing/Routing.jsx";
-import { Toaster } from "react-hot-toast";
+import React from 'react'
 
 const App = () => {
-
   return (
-    <>
-      <Toaster position="top-right" />
-      <Routing />
-    </>
+    <div>App</div>
   )
 }
 
