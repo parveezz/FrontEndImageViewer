@@ -7,7 +7,6 @@ const Images = () => {
             <>
                   <Header />
                   <ImagesPage />
-                  <ImagesTable />
             </>
       )
 }

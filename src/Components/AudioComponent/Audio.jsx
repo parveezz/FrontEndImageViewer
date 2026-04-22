@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Header from '../../Layouts/Shared/Header'
 import AudioTable from './AudioTable'
 import { Upload } from 'lucide-react'
@@ -6,6 +6,17 @@ import AudioModal from './AudioModal'
 
 const Audio = () => {
       const [isModalOpen, setIsModalOpen] = useState(false);
+
+      useEffect(() => {
+            if (isModalOpen) {
+                  document.body.style.overflow = 'hidden';
+            } else {
+                  document.body.style.overflow = 'auto';
+            }
+            return () => {
+                  document.body.style.overflow = 'auto';
+            };
+      }, [isModalOpen]);
 
       return (
             <div className="min-h-screen bg-[#5751531c]">

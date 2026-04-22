@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import Header from "../../Layouts/Shared/Header"
 import VideoTable from "./VideoTable"
 import { Search, SlidersHorizontal, Upload } from "lucide-react"
@@ -6,6 +6,17 @@ import VideoModal from "./VideoModal"
 
 const Videos = () => {
       const [isModalOpen, setIsModalOpen] = useState(false);
+
+      useEffect(() => {
+            if (isModalOpen) {
+                  document.body.style.overflow = 'hidden';
+            } else {
+                  document.body.style.overflow = 'auto';
+            }
+            return () => {
+                  document.body.style.overflow = 'auto';
+            };
+      }, [isModalOpen]);
 
       return (
             <div className="min-h-screen bg-[#5751531c]">
@@ -34,7 +45,7 @@ const Videos = () => {
                                           <SlidersHorizontal size={16} />
                                           Filters
                                     </button>
-                                    <button 
+                                    <button
                                           onClick={() => setIsModalOpen(true)}
                                           className="flex items-center gap-2 bg-black text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition-transform active:scale-95 shadow-sm"
                                     >
@@ -48,12 +59,12 @@ const Videos = () => {
                         <VideoTable />
                   </div>
 
-                  <VideoModal 
-                        isOpen={isModalOpen} 
-                        onClose={() => setIsModalOpen(false)} 
+                  <VideoModal
+                        isOpen={isModalOpen}
+                        onClose={() => setIsModalOpen(false)}
                   />
             </div>
       )
 }
 
-export default Videos
+export default Videos

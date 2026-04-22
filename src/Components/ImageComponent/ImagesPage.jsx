@@ -1,10 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ImagesTable from "./ImagesTable";
 import { Upload } from "lucide-react";
 import ImageModal from "./ImageModal";
 
 const ImagesPage = () => {
       const [isModalOpen, setIsModalOpen] = useState(false);
+
+      useEffect(() => {
+            if (isModalOpen) {
+                  document.body.style.overflow = 'hidden';
+            } else {
+                  document.body.style.overflow = 'auto';
+            }
+            return () => {
+                  document.body.style.overflow = 'auto';
+            };
+      }, [isModalOpen]);
 
       return (
             <div className="p-6 bg-[#5751531c] min-h-screen font-inter">
