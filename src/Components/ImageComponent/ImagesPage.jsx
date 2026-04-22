@@ -8,14 +8,15 @@ const ImagesPage = () => {
 
       useEffect(() => {
             if (isModalOpen) {
-                  document.body.style.overflow = 'hidden';
+                  document.body.classList.add('modal-open');
             } else {
-                  document.body.style.overflow = 'auto';
+                  document.body.classList.remove('modal-open');
             }
             return () => {
-                  document.body.style.overflow = 'auto';
+                  document.body.classList.remove('modal-open');
             };
       }, [isModalOpen]);
+
 
       return (
             <div className="p-6 bg-[#5751531c] min-h-screen font-inter">
@@ -23,7 +24,7 @@ const ImagesPage = () => {
                   <div className="mb-6">
                         <h1 className="text-2xl font-semibold text-gray-800">Images</h1>
                         <p className="text-sm text-gray-500 mt-1">
-                               Manage your image library, upload new assets, and edit details.
+                              Manage your image library, upload new assets, and edit details.
                         </p>
                   </div>
 
@@ -35,7 +36,7 @@ const ImagesPage = () => {
                               className="w-[300px] px-4 py-2 rounded-lg border border-gray-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-gray-200"
                         />
 
-                        <button 
+                        <button
                               onClick={() => setIsModalOpen(true)}
                               className="flex items-center gap-2 bg-black text-white px-4 py-2 rounded-lg text-sm transition-transform active:scale-95"
                         >
@@ -47,9 +48,9 @@ const ImagesPage = () => {
                   {/* Table */}
                   <ImagesTable />
 
-                  <ImageModal 
-                        isOpen={isModalOpen} 
-                        onClose={() => setIsModalOpen(false)} 
+                  <ImageModal
+                        isOpen={isModalOpen}
+                        onClose={() => setIsModalOpen(false)}
                   />
             </div>
       );

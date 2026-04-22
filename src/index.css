@@ -24,3 +24,8 @@
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
       background-color: #5751533a;
 }
+
+/* Prevent scroll in main content area when modal is open */
+body.modal-open div.flex-1.overflow-auto {
+      overflow: hidden !important;
+}

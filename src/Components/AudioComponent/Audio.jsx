@@ -9,14 +9,15 @@ const Audio = () => {
 
       useEffect(() => {
             if (isModalOpen) {
-                  document.body.style.overflow = 'hidden';
+                  document.body.classList.add('modal-open');
             } else {
-                  document.body.style.overflow = 'auto';
+                  document.body.classList.remove('modal-open');
             }
             return () => {
-                  document.body.style.overflow = 'auto';
+                  document.body.classList.remove('modal-open');
             };
       }, [isModalOpen]);
+
 
       return (
             <div className="min-h-screen bg-[#5751531c]">
