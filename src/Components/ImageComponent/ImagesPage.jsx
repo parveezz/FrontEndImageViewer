@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from "react";
-import ImagesTable from "./ImagesTable";
-import { Upload } from "lucide-react";
-import ImageModal from "./ImageModal";
+import EditImageModal from "./EditImageModal";
 
 const ImagesPage = () => {
       const [isModalOpen, setIsModalOpen] = useState(false);
+      const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+      const [selectedImage, setSelectedImage] = useState(null);
 
       useEffect(() => {
-            if (isModalOpen) {
+            if (isModalOpen || isEditModalOpen) {
                   document.body.classList.add('modal-open');
             } else {
                   document.body.classList.remove('modal-open');
@@ -15,8 +14,12 @@ const ImagesPage = () => {
             return () => {
                   document.body.classList.remove('modal-open');
             };
-      }, [isModalOpen]);
+      }, [isModalOpen, isEditModalOpen]);
 
+      const handleEdit = (image) => {
+            setSelectedImage(image);
+            setIsEditModalOpen(true);
+      };
 
       return (
             <div className="p-6 bg-[#5751531c] min-h-screen font-inter">
@@ -46,11 +49,17 @@ const ImagesPage = () => {
                   </div>
 
                   {/* Table */}
-                  <ImagesTable />
+                  <ImagesTable onEdit={handleEdit} />
 
                   <ImageModal
                         isOpen={isModalOpen}
                         onClose={() => setIsModalOpen(false)}
+                  />
+
+                  <EditImageModal 
+                        isOpen={isEditModalOpen}
+                        onClose={() => setIsEditModalOpen(false)}
+                        imageData={selectedImage}
                   />
             </div>
       );

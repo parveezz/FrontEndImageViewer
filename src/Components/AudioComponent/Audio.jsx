@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from 'react'
-import Header from '../../Layouts/Shared/Header'
-import AudioTable from './AudioTable'
-import { Upload } from 'lucide-react'
-import AudioModal from './AudioModal'
+import EditAudioModal from './EditAudioModal'
 
 const Audio = () => {
       const [isModalOpen, setIsModalOpen] = useState(false);
+      const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+      const [selectedTrack, setSelectedTrack] = useState(null);
 
       useEffect(() => {
-            if (isModalOpen) {
+            if (isModalOpen || isEditModalOpen) {
                   document.body.classList.add('modal-open');
             } else {
                   document.body.classList.remove('modal-open');
@@ -16,8 +14,12 @@ const Audio = () => {
             return () => {
                   document.body.classList.remove('modal-open');
             };
-      }, [isModalOpen]);
+      }, [isModalOpen, isEditModalOpen]);
 
+      const handleEdit = (track) => {
+            setSelectedTrack(track);
+            setIsEditModalOpen(true);
+      };
 
       return (
             <div className="min-h-screen bg-[#5751531c]">
@@ -42,12 +44,18 @@ const Audio = () => {
                                     </button>
                               </div>
                         </div>
-                        <AudioTable />
+                        <AudioTable onEdit={handleEdit} />
                   </div>
 
                   <AudioModal 
                         isOpen={isModalOpen} 
                         onClose={() => setIsModalOpen(false)} 
+                  />
+
+                  <EditAudioModal 
+                        isOpen={isEditModalOpen}
+                        onClose={() => setIsEditModalOpen(false)}
+                        audioData={selectedTrack}
                   />
             </div>
       )

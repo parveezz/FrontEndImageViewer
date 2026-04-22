@@ -100,7 +100,10 @@ const VideoTable = () => {
                 
                 <td className="px-6 py-4 text-right">
                   <div className="flex items-center justify-end gap-3">
-                    <button className="p-2 text-gray-400 hover:text-indigo-600 transition-colors">
+                    <button 
+                      onClick={() => onEdit(video)}
+                      className="p-2 text-gray-400 hover:text-indigo-600 transition-colors"
+                    >
                       <Pencil size={18} />
                     </button>
                     <button className="p-2 text-gray-400 hover:text-red-500 transition-colors">

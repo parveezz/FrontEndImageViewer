@@ -78,7 +78,10 @@ const ImagesTable = ({ search = "" }) => {
                                                             {/* Actions */}
                                                             <td className="px-6 py-4 text-right">
                                                                   <div className="flex justify-end gap-4 text-gray-400">
-                                                                        <button className="hover:text-black transition">
+                                                                        <button 
+                                                                              onClick={() => onEdit(item)}
+                                                                              className="hover:text-black transition"
+                                                                        >
                                                                               <Pencil size={16} />
                                                                         </button>
                                                                         <button className="hover:text-red-500 transition">

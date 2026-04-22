@@ -2,13 +2,15 @@ import React, { useState, useEffect } from "react"
 import Header from "../../Layouts/Shared/Header"
 import VideoTable from "./VideoTable"
 import { Search, SlidersHorizontal, Upload } from "lucide-react"
-import VideoModal from "./VideoModal"
+import EditVideoModal from "./EditVideoModal"
 
 const Videos = () => {
       const [isModalOpen, setIsModalOpen] = useState(false);
+      const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+      const [selectedVideo, setSelectedVideo] = useState(null);
 
       useEffect(() => {
-            if (isModalOpen) {
+            if (isModalOpen || isEditModalOpen) {
                   document.body.classList.add('modal-open');
             } else {
                   document.body.classList.remove('modal-open');
@@ -16,8 +18,12 @@ const Videos = () => {
             return () => {
                   document.body.classList.remove('modal-open');
             };
-      }, [isModalOpen]);
+      }, [isModalOpen, isEditModalOpen]);
 
+      const handleEdit = (video) => {
+            setSelectedVideo(video);
+            setIsEditModalOpen(true);
+      };
 
       return (
             <div className="min-h-screen bg-[#5751531c]">
@@ -57,12 +63,18 @@ const Videos = () => {
                         </div>
 
                         {/* Table Section */}
-                        <VideoTable />
+                        <VideoTable onEdit={handleEdit} />
                   </div>
 
                   <VideoModal
                         isOpen={isModalOpen}
                         onClose={() => setIsModalOpen(false)}
+                  />
+
+                  <EditVideoModal 
+                        isOpen={isEditModalOpen}
+                        onClose={() => setIsEditModalOpen(false)}
+                        videoData={selectedVideo}
                   />
             </div>
       )
