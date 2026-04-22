@@ -18,7 +18,7 @@ const data = [
       },
 ];
 
-const ImagesTable = ({ search = "" }) => {
+const ImagesTable = ({ search = "", onEdit }) => {
       const filteredData = data.filter((item) =>
             item.title.toLowerCase().includes(search.toLowerCase()) ||
             item.desc.toLowerCase().includes(search.toLowerCase())

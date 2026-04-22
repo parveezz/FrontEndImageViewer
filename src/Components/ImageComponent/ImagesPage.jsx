@@ -1,3 +1,7 @@
+import React, { useState, useEffect } from "react";
+import ImagesTable from "./ImagesTable";
+import { Upload } from "lucide-react";
+import ImageModal from "./ImageModal";
 import EditImageModal from "./EditImageModal";
 
 const ImagesPage = () => {
@@ -5,16 +9,23 @@ const ImagesPage = () => {
       const [isEditModalOpen, setIsEditModalOpen] = useState(false);
       const [selectedImage, setSelectedImage] = useState(null);
 
+      // Scroll lock for Upload Modal
       useEffect(() => {
-            if (isModalOpen || isEditModalOpen) {
+            if (isModalOpen) {
                   document.body.classList.add('modal-open');
-            } else {
+            } else if (!isEditModalOpen) {
                   document.body.classList.remove('modal-open');
             }
-            return () => {
+      }, [isModalOpen]);
+
+      // Scroll lock for Edit Modal
+      useEffect(() => {
+            if (isEditModalOpen) {
+                  document.body.classList.add('modal-open');
+            } else if (!isModalOpen) {
                   document.body.classList.remove('modal-open');
-            };
-      }, [isModalOpen, isEditModalOpen]);
+            }
+      }, [isEditModalOpen]);
 
       const handleEdit = (image) => {
             setSelectedImage(image);

@@ -11,11 +11,11 @@ const ImageModal = ({ isOpen, onClose }) => {
       onClick={onClose}
     >
       <div
-        className="bg-white w-full max-w-3xl rounded-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200 cursor-default"
+        className="bg-white w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200 cursor-default"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-8 py-6 border-b border-gray-100">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
           <h2 className="text-xl font-bold text-gray-800">Upload Image</h2>
           <button
             onClick={onClose}
@@ -26,20 +26,18 @@ const ImageModal = ({ isOpen, onClose }) => {
         </div>
 
         {/* Content */}
-        <div className="p-8 grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Left Column - Upload Area */}
-          <div className="flex flex-col h-full">
-            <div className="flex-1 border-2 border-dashed border-gray-200 rounded-2xl p-8 flex flex-col items-center justify-center bg-gray-50/50 hover:bg-gray-50 transition-colors cursor-pointer group min-h-[300px]">
-              <div className="w-16 h-16 rounded-full bg-white shadow-sm flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                <ImagePlus className="text-gray-400" size={32} />
-              </div>
-              <p className="text-base font-bold text-gray-700 mb-2">Click to upload or drag and drop</p>
-              <p className="text-xs text-gray-400 font-medium">SVG, PNG, JPG or WEBP (max. 10MB)</p>
+        <div className="p-6 space-y-6 max-h-[80vh] overflow-y-auto custom-scrollbar">
+          {/* Upload Area */}
+          <div className="border-2 border-dashed border-gray-200 rounded-xl p-8 flex flex-col items-center justify-center bg-gray-50/50 hover:bg-gray-50 transition-colors cursor-pointer group">
+            <div className="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+              <ImagePlus className="text-gray-400" size={24} />
             </div>
+            <p className="text-sm font-bold text-gray-700 mb-1">Click to upload or drag and drop</p>
+            <p className="text-xs text-gray-400 font-medium">SVG, PNG, JPG or WEBP (max. 10MB)</p>
           </div>
 
-          {/* Right Column - Form Fields */}
-          <div className="space-y-5">
+          {/* Form Fields */}
+          <div className="space-y-4">
             <div>
               <label className="block text-sm font-bold text-gray-700 mb-1.5">Title</label>
               <input
@@ -52,7 +50,7 @@ const ImageModal = ({ isOpen, onClose }) => {
             <div>
               <label className="block text-sm font-bold text-gray-700 mb-1.5">Description</label>
               <textarea
-                rows="4"
+                rows="3"
                 placeholder="Add a brief description of the image..."
                 className="w-full px-4 py-2.5 rounded-lg border border-gray-200 bg-gray-50/30 focus:outline-none focus:ring-2 focus:ring-red-500/10 focus:border-red-300 transition-all text-sm resize-none"
               ></textarea>
@@ -68,8 +66,6 @@ const ImageModal = ({ isOpen, onClose }) => {
                 <option>Abstract</option>
               </select>
             </div>
-
-
           </div>
         </div>
 

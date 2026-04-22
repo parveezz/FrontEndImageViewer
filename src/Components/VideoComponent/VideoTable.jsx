@@ -1,7 +1,7 @@
 import React from 'react';
 import { Pencil, Trash2, Play } from 'lucide-react';
 
-const VideoTable = () => {
+const VideoTable = ({ onEdit }) => {
   const videos = [
     {
       id: 1,

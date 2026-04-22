@@ -1,7 +1,7 @@
 
 import { Pencil, Trash2, Play, AudioLines } from 'lucide-react';
 
-const AudioTable = () => {
+const AudioTable = ({ onEdit }) => {
   const tracks = [
     {
       id: 1,

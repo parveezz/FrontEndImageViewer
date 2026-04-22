@@ -16,7 +16,7 @@ const EditImageModal = ({ isOpen, onClose, imageData }) => {
       onClick={onClose}
     >
       <div 
-        className="bg-white w-full max-w-xl rounded-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200 cursor-default"
+        className="bg-white w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200 cursor-default"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -31,64 +31,64 @@ const EditImageModal = ({ isOpen, onClose, imageData }) => {
         </div>
 
         {/* Content */}
-        <div className="p-6 space-y-5 max-h-[80vh] overflow-y-auto custom-scrollbar">
+        <div className="p-5 space-y-4 max-h-[80vh] overflow-y-auto custom-scrollbar">
           {/* Image Preview Area */}
-          <div className="space-y-3">
-            <div className="relative rounded-xl overflow-hidden bg-gray-100 group border border-gray-100">
+          <div className="space-y-2">
+            <div className="relative rounded-xl overflow-hidden bg-gray-100 group border border-gray-100 max-h-[160px]">
               <img 
                 src={imageData?.img || "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&q=80"} 
                 alt="Preview" 
-                className="w-full aspect-[2/1] object-cover"
+                className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/10 transition-all">
-                <button className="flex items-center gap-2 bg-white text-gray-800 px-4 py-2 rounded-lg text-sm font-bold shadow-lg transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all">
-                  <RotateCcw size={16} />
+                <button className="flex items-center gap-2 bg-white text-gray-800 px-3 py-1.5 rounded-lg text-xs font-bold shadow-lg transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all">
+                  <RotateCcw size={14} />
                   Replace Image
                 </button>
               </div>
             </div>
             
-            <div className="flex items-center justify-between text-[11px] font-bold text-gray-400 uppercase tracking-wider px-1">
+            <div className="flex items-center justify-between text-[10px] font-bold text-gray-400 uppercase tracking-wider px-1">
               <span>architecture-hero-img.png</span>
               <span>4.2 MB • 2400x1600px</span>
             </div>
           </div>
 
           {/* Form Fields */}
-          <div className="space-y-4 pt-2">
+          <div className="space-y-3 pt-1">
             <div>
-              <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1.5">Title</label>
+              <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1 px-1">Title</label>
               <input 
                 type="text" 
                 defaultValue={imageData?.title || "Modern Architecture Hero"}
-                className="w-full px-4 py-2.5 rounded-lg border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-red-500/10 focus:border-red-300 transition-all text-sm font-medium text-gray-700"
+                className="w-full px-3 py-2 rounded-lg border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-red-500/10 focus:border-red-300 transition-all text-xs font-semibold text-gray-700"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1.5">Description</label>
+              <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1 px-1">Description</label>
               <textarea 
-                rows={3}
-                defaultValue={imageData?.desc || "High resolution shot of the new office building exterior used for homepage hero section."}
-                className="w-full px-4 py-2.5 rounded-lg border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-red-500/10 focus:border-red-300 transition-all text-sm font-medium text-gray-700 resize-none"
+                rows={2}
+                defaultValue={imageData?.desc || "High resolution shot of the new office building exterior."}
+                className="w-full px-3 py-2 rounded-lg border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-red-500/10 focus:border-red-300 transition-all text-xs font-semibold text-gray-700 resize-none"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1.5">Tags</label>
-              <div className="w-full px-3 py-2 rounded-lg border border-gray-200 bg-white flex flex-wrap gap-2 items-center min-h-[45px]">
+              <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1 px-1">Tags</label>
+              <div className="w-full px-2 py-1.5 rounded-lg border border-gray-200 bg-white flex flex-wrap gap-1.5 items-center min-h-[38px]">
                 {tags.map(tag => (
-                  <span key={tag} className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-gray-50 border border-gray-200 text-[11px] font-bold text-gray-600">
+                  <span key={tag} className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-gray-50 border border-gray-200 text-[10px] font-bold text-gray-600">
                     {tag}
-                    <button onClick={() => removeTag(tag)} className="hover:text-red-500 ml-1">
-                      <X size={12} />
+                    <button onClick={() => removeTag(tag)} className="hover:text-red-500 ml-0.5">
+                      <X size={10} />
                     </button>
                   </span>
                 ))}
                 <input 
                   type="text" 
                   placeholder="Add a tag..."
-                  className="flex-1 min-w-[100px] bg-transparent outline-none text-xs font-medium text-gray-400"
+                  className="flex-1 min-w-[80px] bg-transparent outline-none text-[10px] font-medium text-gray-400"
                 />
               </div>
             </div>

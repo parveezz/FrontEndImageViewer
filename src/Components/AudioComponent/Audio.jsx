@@ -1,3 +1,8 @@
+import React, { useState, useEffect } from 'react'
+import Header from '../../Layouts/Shared/Header'
+import AudioTable from './AudioTable'
+import { Upload } from 'lucide-react'
+import AudioModal from './AudioModal'
 import EditAudioModal from './EditAudioModal'
 
 const Audio = () => {
@@ -5,16 +10,23 @@ const Audio = () => {
       const [isEditModalOpen, setIsEditModalOpen] = useState(false);
       const [selectedTrack, setSelectedTrack] = useState(null);
 
+      // Scroll lock for Upload Modal
       useEffect(() => {
-            if (isModalOpen || isEditModalOpen) {
+            if (isModalOpen) {
                   document.body.classList.add('modal-open');
-            } else {
+            } else if (!isEditModalOpen) {
                   document.body.classList.remove('modal-open');
             }
-            return () => {
+      }, [isModalOpen]);
+
+      // Scroll lock for Edit Modal
+      useEffect(() => {
+            if (isEditModalOpen) {
+                  document.body.classList.add('modal-open');
+            } else if (!isModalOpen) {
                   document.body.classList.remove('modal-open');
-            };
-      }, [isModalOpen, isEditModalOpen]);
+            }
+      }, [isEditModalOpen]);
 
       const handleEdit = (track) => {
             setSelectedTrack(track);
@@ -35,7 +47,7 @@ const Audio = () => {
                                           placeholder="Search audio..."
                                           className="w-[300px] px-4 py-2 rounded-lg border border-gray-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-gray-200"
                                     />
-                                    <button 
+                                    <button
                                           onClick={() => setIsModalOpen(true)}
                                           className="flex items-center gap-2 bg-black text-white px-4 py-2 rounded-lg text-sm transition-transform active:scale-95"
                                     >
@@ -47,12 +59,12 @@ const Audio = () => {
                         <AudioTable onEdit={handleEdit} />
                   </div>
 
-                  <AudioModal 
-                        isOpen={isModalOpen} 
-                        onClose={() => setIsModalOpen(false)} 
+                  <AudioModal
+                        isOpen={isModalOpen}
+                        onClose={() => setIsModalOpen(false)}
                   />
 
-                  <EditAudioModal 
+                  <EditAudioModal
                         isOpen={isEditModalOpen}
                         onClose={() => setIsEditModalOpen(false)}
                         audioData={selectedTrack}

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import Header from "../../Layouts/Shared/Header"
 import VideoTable from "./VideoTable"
 import { Search, SlidersHorizontal, Upload } from "lucide-react"
+import VideoModal from "./VideoModal"
 import EditVideoModal from "./EditVideoModal"
 
 const Videos = () => {
@@ -9,16 +10,23 @@ const Videos = () => {
       const [isEditModalOpen, setIsEditModalOpen] = useState(false);
       const [selectedVideo, setSelectedVideo] = useState(null);
 
+      // Scroll lock for Upload Modal
       useEffect(() => {
-            if (isModalOpen || isEditModalOpen) {
+            if (isModalOpen) {
                   document.body.classList.add('modal-open');
-            } else {
+            } else if (!isEditModalOpen) {
                   document.body.classList.remove('modal-open');
             }
-            return () => {
+      }, [isModalOpen]);
+
+      // Scroll lock for Edit Modal
+      useEffect(() => {
+            if (isEditModalOpen) {
+                  document.body.classList.add('modal-open');
+            } else if (!isModalOpen) {
                   document.body.classList.remove('modal-open');
-            };
-      }, [isModalOpen, isEditModalOpen]);
+            }
+      }, [isEditModalOpen]);
 
       const handleEdit = (video) => {
             setSelectedVideo(video);
