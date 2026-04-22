@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
       return (
-            <header className="w-full flex justify-between items-center bg-gray-600/55 py-2 px-6">
+            <header className="w-full flex justify-between items-center bg-[#5751531c] py-2 px-6">
                   <div>
                         <h2 className="font-bold text-lg tracking-wide ">Dashboard Overview</h2>
                         <p className="font-medium text-sm tracking-wide">Welcome back, Admin!</p>
