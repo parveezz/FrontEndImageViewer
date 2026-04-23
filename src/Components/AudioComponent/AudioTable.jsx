@@ -1,8 +1,8 @@
-
+import React, { useState } from 'react';
 import { Pencil, Trash2, Play, AudioLines } from 'lucide-react';
 
 const AudioTable = ({ onEdit }) => {
-  const [deletingId, setDeletingId] = React.useState(null);
+  const [deletingId, setDeletingId] = useState(null);
   const tracks = [
     {
       id: 1,
@@ -67,7 +67,11 @@ const AudioTable = ({ onEdit }) => {
               >
                 {/* Overlay for Delete Confirmation */}
                 {deletingId === track.id && (
-                  <td colSpan="5" className="absolute inset-0 z-10 flex items-center justify-center bg-white/10 backdrop-blur-[2px]">
+                  <td 
+                    colSpan="5" 
+                    className="absolute inset-0 z-10 flex items-center justify-center bg-white/10 backdrop-blur-[2px]"
+                    onClick={() => setDeletingId(null)}
+                  >
                     <div className="flex gap-3 animate-in fade-in zoom-in duration-200">
                       <button 
                         onClick={() => setDeletingId(null)}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Pencil, Trash2 } from "lucide-react";
 
 const data = [
@@ -19,7 +19,7 @@ const data = [
 ];
 
 const ImagesTable = ({ search = "", onEdit }) => {
-      const [deletingId, setDeletingId] = React.useState(null);
+      const [deletingId, setDeletingId] = useState(null);
       const filteredData = data.filter((item) =>
             item.title.toLowerCase().includes(search.toLowerCase()) ||
             item.desc.toLowerCase().includes(search.toLowerCase())
@@ -51,15 +51,17 @@ const ImagesTable = ({ search = "", onEdit }) => {
                                                       >
                                                             {/* Overlay for Delete Confirmation */}
                                                             {deletingId === item.id && (
-                                                                  <td colSpan="4" className="absolute inset-0 z-10 flex items-center justify-center bg-white/10 backdrop-blur-[2px]">
+                                                                  <td colSpan="4" className="absolute inset-0 z-10 flex items-center justify-center bg-white/10 backdrop-blur-[2px]"
+                                                                        onClick={() => setDeletingId(null)}
+                                                                  >
                                                                         <div className="flex gap-3 animate-in fade-in zoom-in duration-200">
-                                                                              <button 
+                                                                              <button
                                                                                     onClick={() => setDeletingId(null)}
                                                                                     className="px-4 py-1.5 rounded-lg bg-gray-100 text-gray-600 text-xs font-bold hover:bg-gray-200 transition-colors"
                                                                               >
                                                                                     Cancel
                                                                               </button>
-                                                                              <button 
+                                                                              <button
                                                                                     className="px-4 py-1.5 rounded-lg bg-red-500 text-white text-xs font-bold hover:bg-red-600 transition-colors shadow-md shadow-red-500/20"
                                                                               >
                                                                                     Confirm Delete
@@ -95,13 +97,13 @@ const ImagesTable = ({ search = "", onEdit }) => {
 
                                                             <td className={`px-6 py-4 text-right ${deletingId === item.id ? 'blur-[4px]' : ''} transition-all duration-300`}>
                                                                   <div className="flex justify-end gap-4 text-gray-400">
-                                                                        <button 
+                                                                        <button
                                                                               onClick={() => onEdit(item)}
                                                                               className="hover:text-black transition"
                                                                         >
                                                                               <Pencil size={16} />
                                                                         </button>
-                                                                        <button 
+                                                                        <button
                                                                               onClick={() => setDeletingId(item.id)}
                                                                               className="hover:text-red-500 transition"
                                                                         >
