@@ -2,6 +2,7 @@ import React from 'react';
 import { Pencil, Trash2, Play } from 'lucide-react';
 
 const VideoTable = ({ onEdit }) => {
+  const [deletingId, setDeletingId] = React.useState(null);
   const videos = [
     {
       id: 1,
@@ -63,8 +64,27 @@ const VideoTable = ({ onEdit }) => {
           </thead>
           <tbody className="divide-y divide-gray-50">
             {videos.map((video) => (
-              <tr key={video.id} className="group hover:bg-gray-50/50 transition-colors">
-                <td className="px-6 py-4">
+              <tr key={video.id} className="group hover:bg-gray-50/50 transition-colors relative">
+                {/* Overlay for Delete Confirmation */}
+                {deletingId === video.id && (
+                  <td colSpan="4" className="absolute inset-0 z-10 flex items-center justify-center bg-white/10 backdrop-blur-[2px]">
+                    <div className="flex gap-3 animate-in fade-in zoom-in duration-200">
+                      <button 
+                        onClick={() => setDeletingId(null)}
+                        className="px-4 py-1.5 rounded-lg bg-gray-100 text-gray-600 text-xs font-bold hover:bg-gray-200 transition-colors"
+                      >
+                        Cancel
+                      </button>
+                      <button 
+                        className="px-4 py-1.5 rounded-lg bg-red-500 text-white text-xs font-bold hover:bg-red-600 transition-colors shadow-md shadow-red-500/20"
+                      >
+                        Confirm Delete
+                      </button>
+                    </div>
+                  </td>
+                )}
+
+                <td className={`px-6 py-4 ${deletingId === video.id ? 'blur-[4px] grayscale' : ''} transition-all duration-300`}>
                   <div className="relative w-32 h-20 rounded-lg overflow-hidden bg-gray-900 group/thumb cursor-pointer">
                     <img 
                       src={video.thumbnail} 
@@ -82,7 +102,7 @@ const VideoTable = ({ onEdit }) => {
                   </div>
                 </td>
                 
-                <td className="px-6 py-4">
+                <td className={`px-6 py-4 ${deletingId === video.id ? 'blur-[4px]' : ''} transition-all duration-300`}>
                   <div className="flex flex-col">
                     <span className="text-base font-semibold text-gray-800 mb-0.5">{video.title}</span>
                     <span className="text-xs text-gray-400 font-medium">
@@ -91,14 +111,14 @@ const VideoTable = ({ onEdit }) => {
                   </div>
                 </td>
                 
-                <td className="px-6 py-4">
+                <td className={`px-6 py-4 ${deletingId === video.id ? 'blur-[4px]' : ''} transition-all duration-300`}>
                   <div className="flex flex-col">
                     <span className="text-sm font-bold text-gray-700">{video.views}</span>
                     <span className="text-xs text-gray-400 font-medium">{video.date}</span>
                   </div>
                 </td>
                 
-                <td className="px-6 py-4 text-right">
+                <td className={`px-6 py-4 text-right ${deletingId === video.id ? 'blur-[4px]' : ''} transition-all duration-300`}>
                   <div className="flex items-center justify-end gap-3">
                     <button 
                       onClick={() => onEdit(video)}
@@ -106,7 +126,10 @@ const VideoTable = ({ onEdit }) => {
                     >
                       <Pencil size={18} />
                     </button>
-                    <button className="p-2 text-gray-400 hover:text-red-500 transition-colors">
+                    <button 
+                      onClick={() => setDeletingId(video.id)}
+                      className="p-2 text-gray-400 hover:text-red-500 transition-colors"
+                    >
                       <Trash2 size={18} />
                     </button>
                   </div>

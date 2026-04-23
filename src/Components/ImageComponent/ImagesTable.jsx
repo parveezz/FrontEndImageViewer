@@ -19,6 +19,7 @@ const data = [
 ];
 
 const ImagesTable = ({ search = "", onEdit }) => {
+      const [deletingId, setDeletingId] = React.useState(null);
       const filteredData = data.filter((item) =>
             item.title.toLowerCase().includes(search.toLowerCase()) ||
             item.desc.toLowerCase().includes(search.toLowerCase())
@@ -46,10 +47,29 @@ const ImagesTable = ({ search = "", onEdit }) => {
                                                 filteredData.map((item) => (
                                                       <tr
                                                             key={item.id}
-                                                            className="hover:bg-gray-50/50 transition-colors group"
+                                                            className="hover:bg-gray-50/50 transition-colors group relative"
                                                       >
-                                                            {/* Preview */}
-                                                            <td className="px-6 py-4">
+                                                            {/* Overlay for Delete Confirmation */}
+                                                            {deletingId === item.id && (
+                                                                  <td colSpan="4" className="absolute inset-0 z-10 flex items-center justify-center bg-white/10 backdrop-blur-[2px]">
+                                                                        <div className="flex gap-3 animate-in fade-in zoom-in duration-200">
+                                                                              <button 
+                                                                                    onClick={() => setDeletingId(null)}
+                                                                                    className="px-4 py-1.5 rounded-lg bg-gray-100 text-gray-600 text-xs font-bold hover:bg-gray-200 transition-colors"
+                                                                              >
+                                                                                    Cancel
+                                                                              </button>
+                                                                              <button 
+                                                                                    className="px-4 py-1.5 rounded-lg bg-red-500 text-white text-xs font-bold hover:bg-red-600 transition-colors shadow-md shadow-red-500/20"
+                                                                              >
+                                                                                    Confirm Delete
+                                                                              </button>
+                                                                        </div>
+                                                                  </td>
+                                                            )}
+
+                                                            {/* Row Content (blurred when deleting) */}
+                                                            <td className={`px-6 py-4 ${deletingId === item.id ? 'blur-[4px] grayscale' : ''} transition-all duration-300`}>
                                                                   <div className="flex items-center gap-4">
                                                                         <div className="w-12 h-12 rounded-lg bg-gray-100 overflow-hidden flex-shrink-0">
                                                                               <img
@@ -61,22 +81,19 @@ const ImagesTable = ({ search = "", onEdit }) => {
                                                                   </div>
                                                             </td>
 
-                                                            {/* Title */}
-                                                            <td className="px-6 py-4">
+                                                            <td className={`px-6 py-4 ${deletingId === item.id ? 'blur-[4px]' : ''} transition-all duration-300`}>
                                                                   <span className="font-semibold text-gray-700">
                                                                         {item.title}
                                                                   </span>
                                                             </td>
 
-                                                            {/* Description */}
-                                                            <td className="px-6 py-4">
+                                                            <td className={`px-6 py-4 ${deletingId === item.id ? 'blur-[4px]' : ''} transition-all duration-300`}>
                                                                   <p className="text-gray-400 max-w-[350px] truncate">
                                                                         {item.desc}
                                                                   </p>
                                                             </td>
 
-                                                            {/* Actions */}
-                                                            <td className="px-6 py-4 text-right">
+                                                            <td className={`px-6 py-4 text-right ${deletingId === item.id ? 'blur-[4px]' : ''} transition-all duration-300`}>
                                                                   <div className="flex justify-end gap-4 text-gray-400">
                                                                         <button 
                                                                               onClick={() => onEdit(item)}
@@ -84,7 +101,10 @@ const ImagesTable = ({ search = "", onEdit }) => {
                                                                         >
                                                                               <Pencil size={16} />
                                                                         </button>
-                                                                        <button className="hover:text-red-500 transition">
+                                                                        <button 
+                                                                              onClick={() => setDeletingId(item.id)}
+                                                                              className="hover:text-red-500 transition"
+                                                                        >
                                                                               <Trash2 size={16} />
                                                                         </button>
                                                                   </div>

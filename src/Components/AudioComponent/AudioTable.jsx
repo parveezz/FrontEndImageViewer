@@ -2,6 +2,7 @@
 import { Pencil, Trash2, Play, AudioLines } from 'lucide-react';
 
 const AudioTable = ({ onEdit }) => {
+  const [deletingId, setDeletingId] = React.useState(null);
   const tracks = [
     {
       id: 1,
@@ -62,9 +63,28 @@ const AudioTable = ({ onEdit }) => {
             {tracks.map((track) => (
               <tr
                 key={track.id}
-                className={`group transition-colors hover:bg-gray-50/50 ${track.active ? track.bgColor : ''}`}
+                className={`group transition-colors hover:bg-gray-50/50 relative ${track.active ? track.bgColor : ''}`}
               >
-                <td className="px-6 py-4">
+                {/* Overlay for Delete Confirmation */}
+                {deletingId === track.id && (
+                  <td colSpan="5" className="absolute inset-0 z-10 flex items-center justify-center bg-white/10 backdrop-blur-[2px]">
+                    <div className="flex gap-3 animate-in fade-in zoom-in duration-200">
+                      <button 
+                        onClick={() => setDeletingId(null)}
+                        className="px-4 py-1.5 rounded-lg bg-gray-100 text-gray-600 text-xs font-bold hover:bg-gray-200 transition-colors"
+                      >
+                        Cancel
+                      </button>
+                      <button 
+                        className="px-4 py-1.5 rounded-lg bg-red-500 text-white text-xs font-bold hover:bg-red-600 transition-colors shadow-md shadow-red-500/20"
+                      >
+                        Confirm Delete
+                      </button>
+                    </div>
+                  </td>
+                )}
+
+                <td className={`px-6 py-4 ${deletingId === track.id ? 'blur-[4px] grayscale' : ''} transition-all duration-300`}>
                   <div className="flex items-center gap-4">
                     <div className="relative w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 group/img">
                       <img
@@ -106,21 +126,21 @@ const AudioTable = ({ onEdit }) => {
                   </div>
                 </td>
 
-                <td className="px-6 py-4">
+                <td className={`px-6 py-4 ${deletingId === track.id ? 'blur-[4px]' : ''} transition-all duration-300`}>
                   <span className="text-sm text-gray-600 font-medium">{track.category}</span>
                 </td>
 
-                <td className="px-6 py-4">
+                <td className={`px-6 py-4 ${deletingId === track.id ? 'blur-[4px]' : ''} transition-all duration-300`}>
                   <span className={`text-sm font-semibold ${track.active ? 'text-red-600' : 'text-gray-600'}`}>
                     {track.duration}
                   </span>
                 </td>
 
-                <td className="px-6 py-4">
+                <td className={`px-6 py-4 ${deletingId === track.id ? 'blur-[4px]' : ''} transition-all duration-300`}>
                   <span className="text-sm text-gray-600 font-medium">{track.plays}</span>
                 </td>
 
-                <td className="px-6 py-4 text-right">
+                <td className={`px-6 py-4 text-right ${deletingId === track.id ? 'blur-[4px]' : ''} transition-all duration-300`}>
                   <div className="flex items-center justify-end gap-2">
                     <button 
                       onClick={() => onEdit(track)}
@@ -128,7 +148,10 @@ const AudioTable = ({ onEdit }) => {
                     >
                       <Pencil size={18} />
                     </button>
-                    <button className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors">
+                    <button 
+                      onClick={() => setDeletingId(track.id)}
+                      className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                    >
                       <Trash2 size={18} />
                     </button>
                   </div>
