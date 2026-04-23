@@ -1,21 +1,25 @@
+import React, { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
+import Skeleton from "../Components/Shared/Skeleton";
 
-import Dashboard from "../Components/DashboardComponent/Dashboard";
-import Images from "../Components/ImageComponent/Images";
-import Videos from "../Components/VideoComponent/Videos";
-import Audio from "../Components/AudioComponent/Audio";
-import Profile from "../Components/ProfileComponent/Profile";
+const Dashboard = lazy(() => import("../Components/DashboardComponent/Dashboard"));
+const Images = lazy(() => import("../Components/ImageComponent/Images"));
+const Videos = lazy(() => import("../Components/VideoComponent/Videos"));
+const Audio = lazy(() => import("../Components/AudioComponent/Audio"));
+const Profile = lazy(() => import("../Components/ProfileComponent/Profile"));
 
 
 const Routing = () => {
       return (
-            <Routes>
-                  <Route path="/" element={<Dashboard />} />
-                  <Route path="/images" element={<Images />} />
-                  <Route path="/videos" element={<Videos />} />
-                  <Route path="/audio" element={<Audio />} />
-                  <Route path="/profile" element={<Profile />} />
-            </Routes>
+            <Suspense fallback={<Skeleton />}>
+                  <Routes>
+                        <Route path="/" element={<Dashboard />} />
+                        <Route path="/images" element={<Images />} />
+                        <Route path="/videos" element={<Videos />} />
+                        <Route path="/audio" element={<Audio />} />
+                        <Route path="/profile" element={<Profile />} />
+                  </Routes>
+            </Suspense>
       );
 };
 

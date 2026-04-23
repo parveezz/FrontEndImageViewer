@@ -34,9 +34,9 @@ const Sidebar = () => {
                                           key={index}
                                           to={link.path}
                                           className={({ isActive }) =>
-                                                `flex items-center gap-3 p-3 rounded-xl transition-all duration-200 ${isActive
-                                                      ? "bg-white text-black font-semibold shadow-lg shadow-white/5"
-                                                      : "text-gray-400 hover:bg-gray-800 hover:text-white"
+                                                `flex items-center gap-3 py-3 pl-4 transition-all duration-200 ${isActive
+                                                      ? "bg-white text-black font-semibold shadow-lg shadow-white/5 rounded-l-full rounded-r-none -mr-4 pr-4"
+                                                      : "text-gray-400 hover:text-white rounded-xl pr-3"
                                                 }`
                                           }
                                     >

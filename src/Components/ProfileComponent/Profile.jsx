@@ -1,6 +1,4 @@
 
-import React from 'react'
-import Header from '../../Layouts/Shared/Header'
 import ProfileInfo from './ProfileInfo'
 import SecuritySettings from './SecuritySettings'
 import PreferencesSettings from './PreferencesSettings'
@@ -8,7 +6,6 @@ import PreferencesSettings from './PreferencesSettings'
 const Profile = () => {
       return (
             <div className="min-h-screen bg-[#5751531c]">
-                  <Header />
                   <div className="w-full md:p-10">
                         {/* Header Section */}
                         <div className="mb-10">
