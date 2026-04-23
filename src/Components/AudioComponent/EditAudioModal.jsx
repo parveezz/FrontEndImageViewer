@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { X, Music, RotateCcw } from 'lucide-react';
 
 const EditAudioModal = ({ isOpen, onClose, audioData }) => {
+  const fileInputRef = useRef(null);
+
   if (!isOpen) return null;
+
+  const handleReplaceClick = () => {
+    fileInputRef.current?.click();
+  };
 
   return (
     <div
@@ -45,7 +51,17 @@ const EditAudioModal = ({ isOpen, onClose, audioData }) => {
                 </span>
               </div>
             </div>
-            <button className="flex items-center gap-2 bg-white border border-gray-200 text-gray-700 px-2.5 py-1.5 rounded-lg text-[10px] font-bold hover:bg-gray-50 transition-all shadow-sm">
+            <input 
+              type="file" 
+              ref={fileInputRef}
+              className="hidden" 
+              accept="audio/*"
+              onChange={(e) => console.log(e.target.files[0])}
+            />
+            <button 
+              onClick={handleReplaceClick}
+              className="flex items-center gap-2 bg-white border border-gray-200 text-gray-700 px-2.5 py-1.5 rounded-lg text-[10px] font-bold hover:bg-gray-50 transition-all shadow-sm"
+            >
               <RotateCcw size={12} />
               Replace
             </button>
