@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { X, Video, Upload } from 'lucide-react';
 
 const VideoModal = ({ isOpen, onClose }) => {
+  const fileInputRef = useRef(null);
+
   if (!isOpen) return null;
+
+  const handleUploadClick = () => {
+    fileInputRef.current?.click();
+  };
 
   return (
     <div 
@@ -27,7 +33,17 @@ const VideoModal = ({ isOpen, onClose }) => {
         {/* Content */}
         <div className="p-6 space-y-6">
           {/* Drag & Drop Area */}
-          <div className="border-2 border-dashed border-gray-200 rounded-xl p-8 flex flex-col items-center justify-center bg-gray-50/50 hover:bg-gray-50 transition-colors cursor-pointer group">
+          <div 
+            onClick={handleUploadClick}
+            className="border-2 border-dashed border-gray-200 rounded-xl p-8 flex flex-col items-center justify-center bg-gray-50/50 hover:bg-gray-50 transition-colors cursor-pointer group"
+          >
+            <input 
+              type="file" 
+              ref={fileInputRef}
+              className="hidden" 
+              accept="video/*"
+              onChange={(e) => console.log(e.target.files[0])}
+            />
             <div className="w-12 h-12 rounded-full bg-purple-50 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
               <Video className="text-purple-500" size={24} />
             </div>

@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { X, Image as ImageIcon, RotateCcw } from 'lucide-react';
 
 const EditImageModal = ({ isOpen, onClose, imageData }) => {
   const [tags, setTags] = useState(['architecture', 'hero', 'office']);
+  const fileInputRef = useRef(null);
 
   if (!isOpen) return null;
+
+  const handleReplaceClick = () => {
+    fileInputRef.current?.click();
+  };
 
   const removeTag = (tagToRemove) => {
     setTags(tags.filter(tag => tag !== tagToRemove));
@@ -41,7 +46,17 @@ const EditImageModal = ({ isOpen, onClose, imageData }) => {
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/10 transition-all">
-                <button className="flex items-center gap-2 bg-white text-gray-800 px-3 py-1.5 rounded-lg text-xs font-bold shadow-lg transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all">
+                <input 
+                  type="file" 
+                  ref={fileInputRef}
+                  className="hidden" 
+                  accept="image/*"
+                  onChange={(e) => console.log(e.target.files[0])}
+                />
+                <button 
+                  onClick={handleReplaceClick}
+                  className="flex items-center gap-2 bg-white text-gray-800 px-3 py-1.5 rounded-lg text-xs font-bold shadow-lg transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all"
+                >
                   <RotateCcw size={14} />
                   Replace Image
                 </button>

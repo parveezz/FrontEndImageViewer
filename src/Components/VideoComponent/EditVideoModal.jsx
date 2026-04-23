@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { X, Play, Image as ImageIcon } from 'lucide-react';
 
 const EditVideoModal = ({ isOpen, onClose, videoData }) => {
+  const fileInputRef = useRef(null);
+
   if (!isOpen) return null;
+
+  const handleChangeThumbnailClick = () => {
+    fileInputRef.current?.click();
+  };
 
   return (
     <div 
@@ -38,7 +44,17 @@ const EditVideoModal = ({ isOpen, onClose, videoData }) => {
                 <Play size={18} className="text-white fill-white ml-0.5" />
               </div>
             </div>
-            <button className="absolute bottom-3 right-3 flex items-center gap-2 bg-black/70 hover:bg-black text-white px-2.5 py-1.5 rounded-lg text-[10px] font-bold backdrop-blur-md transition-all">
+            <input 
+              type="file" 
+              ref={fileInputRef}
+              className="hidden" 
+              accept="image/*"
+              onChange={(e) => console.log(e.target.files[0])}
+            />
+            <button 
+              onClick={handleChangeThumbnailClick}
+              className="absolute bottom-3 right-3 flex items-center gap-2 bg-black/70 hover:bg-black text-white px-2.5 py-1.5 rounded-lg text-[10px] font-bold backdrop-blur-md transition-all"
+            >
               <ImageIcon size={12} />
               Change Thumbnail
             </button>

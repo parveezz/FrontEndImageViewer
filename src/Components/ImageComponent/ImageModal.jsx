@@ -1,8 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { X, ImagePlus, Upload, Tag as TagIcon } from 'lucide-react';
 
 const ImageModal = ({ isOpen, onClose }) => {
+  const fileInputRef = useRef(null);
+
   if (!isOpen) return null;
+
+  const handleUploadClick = () => {
+    fileInputRef.current?.click();
+  };
 
 
   return (
@@ -28,7 +34,17 @@ const ImageModal = ({ isOpen, onClose }) => {
         {/* Content */}
         <div className="p-6 space-y-6 max-h-[80vh] overflow-y-auto custom-scrollbar">
           {/* Upload Area */}
-          <div className="border-2 border-dashed border-gray-200 rounded-xl p-8 flex flex-col items-center justify-center bg-gray-50/50 hover:bg-gray-50 transition-colors cursor-pointer group">
+          <div 
+            onClick={handleUploadClick}
+            className="border-2 border-dashed border-gray-200 rounded-xl p-8 flex flex-col items-center justify-center bg-gray-50/50 hover:bg-gray-50 transition-colors cursor-pointer group"
+          >
+            <input 
+              type="file" 
+              ref={fileInputRef}
+              className="hidden" 
+              accept="image/*"
+              onChange={(e) => console.log(e.target.files[0])}
+            />
             <div className="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
               <ImagePlus className="text-gray-400" size={24} />
             </div>
