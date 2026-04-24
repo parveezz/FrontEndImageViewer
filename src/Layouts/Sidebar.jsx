@@ -5,11 +5,13 @@ import {
       Video,
       Music,
       Settings,
+      User,
 } from "lucide-react";
 
 const Sidebar = () => {
       const navLinks = [
             { name: "Dashboard", path: "/", icon: LayoutDashboard },
+            { name: "Users", path: "/user", icon: User },
             { name: "Images", path: "/images", icon: Image },
             { name: "Videos", path: "/videos", icon: Video },
             { name: "Audio", path: "/audio", icon: Music },
