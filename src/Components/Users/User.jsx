@@ -4,7 +4,7 @@ import Header from "../../Layouts/Shared/Header"
 const User = () => {
       return (
             <>
-                  <Header />
+                  <Header heading={"User's Dashboard"} />
             </>
       )
 }

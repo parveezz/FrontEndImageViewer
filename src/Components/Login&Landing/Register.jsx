@@ -148,66 +148,36 @@ const Register = () => {
       </div>
 
       {/* Right Panel — Branding */}
+      {/* Right Panel — Branding */}
       <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden items-center justify-center">
-        {/* Gradient background — reversed direction from login */}
+        {/* Pure Image Background */}
         <div
-          className="absolute inset-0"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            background: "linear-gradient(135deg, #a855f7 0%, #7c3aed 40%, #6366f1 70%, #818cf8 100%)",
+            backgroundImage: `url('/register.avif')`,
           }}
         />
 
-        {/* Animated orbs */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div
-            className="absolute rounded-full blur-3xl opacity-30"
-            style={{
-              width: "400px",
-              height: "400px",
-              background: "radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%)",
-              bottom: "-5%",
-              left: "-10%",
-              animation: "float 8s ease-in-out infinite",
-            }}
-          />
-          <div
-            className="absolute rounded-full blur-3xl opacity-20"
-            style={{
-              width: "350px",
-              height: "350px",
-              background: "radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%)",
-              top: "5%",
-              right: "-5%",
-              animation: "float 10s ease-in-out infinite reverse",
-            }}
-          />
-        </div>
-
-        {/* Grid overlay */}
-        <div
-          className="absolute inset-0 opacity-[0.06]"
-          style={{
-            backgroundImage: `linear-gradient(rgba(255,255,255,0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.2) 1px, transparent 1px)`,
-            backgroundSize: "50px 50px",
-          }}
-        />
+        {/* Optional: Dark overlay if the image makes text hard to read */}
+        <div className="absolute inset-0 bg-black/20" />
 
         {/* Content */}
         <div className="relative z-10 text-center px-12 max-w-lg" style={{ animation: "fadeInUp 0.8s ease-out" }}>
           <div
             className="inline-flex items-center justify-center w-20 h-20 rounded-3xl mb-8 shadow-2xl"
             style={{
-              background: "rgba(255,255,255,0.15)",
-              backdropFilter: "blur(20px)",
-              border: "1px solid rgba(255,255,255,0.2)",
+              background: "rgba(255,255,255,0.2)",
+              backdropFilter: "blur(12px)",
+              border: "1px solid rgba(255,255,255,0.3)",
             }}
           >
             <UserPlus size={36} className="text-white" />
           </div>
-          <h1 className="text-4xl font-bold text-white mb-4 tracking-tight">
+
+          <h1 className="text-4xl font-bold text-white mb-4 tracking-tight drop-shadow-md">
             Join the Team
           </h1>
-          <p className="text-white/70 text-lg leading-relaxed mb-10">
+          <p className="text-white/90 text-lg leading-relaxed mb-10 drop-shadow-sm">
             Create your admin account and start managing your media library in seconds.
           </p>
 
@@ -223,13 +193,13 @@ const Register = () => {
                 key={stat.label}
                 className="rounded-2xl py-4 px-3 text-center"
                 style={{
-                  background: "rgba(255,255,255,0.1)",
-                  backdropFilter: "blur(10px)",
-                  border: "1px solid rgba(255,255,255,0.12)",
+                  background: "rgba(0,0,0,0.3)", // Darker glass to pop against image
+                  backdropFilter: "blur(8px)",
+                  border: "1px solid rgba(255,255,255,0.1)",
                 }}
               >
                 <div className="text-2xl font-bold text-white mb-1">{stat.value}</div>
-                <div className="text-xs text-white/60 font-medium">{stat.label}</div>
+                <div className="text-xs text-white/70 font-medium">{stat.label}</div>
               </div>
             ))}
           </div>

@@ -35,7 +35,7 @@ const Dashboard = () => {
       ];
       return (
             <>
-                  <Header />
+                  <Header heading={" DashBoard"} />
 
                   {/* Stats Card */}
                   <div className="w-full bg-[#5751531c] p-4">
@@ -54,29 +54,29 @@ const Dashboard = () => {
                         </div>
                         <div className="flex items-center gap-3">
                               <div className="relative group">
-                                    <Search 
-                                          className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-gray-600 transition-colors" 
-                                          size={16} 
+                                    <Search
+                                          className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-gray-600 transition-colors"
+                                          size={16}
                                     />
-                                    <input 
-                                          type="text" 
-                                          name="search" 
-                                          id="search" 
-                                          placeholder="Search files..." 
-                                          className="w-[240px] pl-9 pr-4 py-2 rounded-xl border border-gray-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-gray-200/50 shadow-sm transition-all" 
+                                    <input
+                                          type="text"
+                                          name="search"
+                                          id="search"
+                                          placeholder="Search files..."
+                                          className="w-[240px] pl-9 pr-4 py-2 rounded-xl border border-gray-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-gray-200/50 shadow-sm transition-all"
                                     />
                               </div>
                               <div className="relative">
-                                    <button 
+                                    <button
                                           onClick={() => setIsFilterOpen(!isFilterOpen)}
                                           className="flex items-center gap-2 bg-white border border-gray-200 text-gray-600 px-3 py-2 rounded-lg text-sm transition-all active:scale-95 hover:bg-gray-50 shadow-sm font-medium"
                                     >
                                           <ListFilter size={14} />
                                           Filter
                                     </button>
-                                    <FilterDropdown 
-                                          isOpen={isFilterOpen} 
-                                          onClose={() => setIsFilterOpen(false)} 
+                                    <FilterDropdown
+                                          isOpen={isFilterOpen}
+                                          onClose={() => setIsFilterOpen(false)}
                                           sections={[
                                                 {
                                                       title: 'Media Type',

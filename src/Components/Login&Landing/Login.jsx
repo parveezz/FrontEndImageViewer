@@ -81,8 +81,11 @@ const Login = () => {
                         <div
                               className="absolute inset-0"
                               style={{
-                                    background:
-                                          "linear-gradient(135deg, #6366f1 0%, #7c3aed 40%, #a855f7 70%, #c084fc 100%)",
+                                    backgroundImage:
+                                          "url('/public/login.jpg')",
+                                    backgroundSize: "cover",
+                                    backgroundPosition: "center",
+                                    backgroundRepeat: "no-repeat",
                               }}
                         />
 

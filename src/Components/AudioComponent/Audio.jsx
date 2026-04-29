@@ -37,7 +37,7 @@ const Audio = () => {
 
       return (
             <div className="min-h-screen bg-[#5751531c]">
-                  <Header />
+                  <Header heading={"Audio Board"} />
                   <div className="p-6">
                         <div className="mb-8">
                               <h1 className="text-2xl font-bold text-gray-900">Audio Library</h1>
@@ -46,9 +46,9 @@ const Audio = () => {
 
                         <div className="flex items-center justify-between mb-6">
                               <div className="relative group">
-                                    <Search 
-                                          className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-gray-600 transition-colors" 
-                                          size={18} 
+                                    <Search
+                                          className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-gray-600 transition-colors"
+                                          size={18}
                                     />
                                     <input
                                           type="text"
@@ -66,9 +66,9 @@ const Audio = () => {
                                                 <ListFilter size={16} />
                                                 Filter
                                           </button>
-                                          <FilterDropdown 
-                                                isOpen={isFilterOpen} 
-                                                onClose={() => setIsFilterOpen(false)} 
+                                          <FilterDropdown
+                                                isOpen={isFilterOpen}
+                                                onClose={() => setIsFilterOpen(false)}
                                                 sections={[
                                                       {
                                                             title: 'Category',

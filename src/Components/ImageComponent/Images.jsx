@@ -5,7 +5,7 @@ import ImagesTable from './ImagesTable'
 const Images = () => {
       return (
             <>
-                  <Header />
+                  <Header heading={"Images Dashboard"} />
                   <ImagesPage />
             </>
       )

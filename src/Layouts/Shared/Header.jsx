@@ -1,7 +1,7 @@
 import { LogOut } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ heading }) => {
       const logout = useNavigate();
 
 
@@ -14,7 +14,7 @@ const Header = () => {
       return (
             <header className="w-full flex justify-between items-center bg-[#5751531c] py-2 px-6">
                   <div>
-                        <h2 className="font-bold text-lg tracking-wide ">Dashboard Overview</h2>
+                        <h2 className="font-bold text-lg tracking-wide ">{heading}</h2>
                         <p className="font-medium text-sm tracking-wide">Welcome back, Admin!</p>
                   </div>
                   <div className="flex items-center gap-3 ">

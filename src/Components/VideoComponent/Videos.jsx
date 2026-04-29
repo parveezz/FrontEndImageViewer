@@ -37,7 +37,7 @@ const Videos = () => {
 
       return (
             <div className="min-h-screen bg-[#5751531c]">
-                  <Header />
+                  <Header heading={"Videos Dashboard"} />
                   <div className="p-6">
                         {/* Header Section */}
                         <div className="mb-8">
@@ -48,9 +48,9 @@ const Videos = () => {
                         {/* Actions Section */}
                         <div className="flex items-center justify-between mb-6">
                               <div className="relative group">
-                                    <Search 
-                                          className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-gray-600 transition-colors" 
-                                          size={18} 
+                                    <Search
+                                          className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-gray-600 transition-colors"
+                                          size={18}
                                     />
                                     <input
                                           type="text"
@@ -61,16 +61,16 @@ const Videos = () => {
 
                               <div className="flex items-center gap-3">
                                     <div className="relative">
-                                          <button 
+                                          <button
                                                 onClick={() => setIsFilterOpen(!isFilterOpen)}
                                                 className="flex items-center gap-2 bg-white border border-gray-200 text-gray-600 px-4 py-2 rounded-lg text-sm transition-all active:scale-95 hover:bg-gray-50 hover:border-gray-300 shadow-sm font-medium"
                                           >
                                                 <SlidersHorizontal size={16} />
                                                 Filters
                                           </button>
-                                          <FilterDropdown 
-                                                isOpen={isFilterOpen} 
-                                                onClose={() => setIsFilterOpen(false)} 
+                                          <FilterDropdown
+                                                isOpen={isFilterOpen}
+                                                onClose={() => setIsFilterOpen(false)}
                                                 sections={[
                                                       {
                                                             title: 'Category',
@@ -109,7 +109,7 @@ const Videos = () => {
                         onClose={() => setIsModalOpen(false)}
                   />
 
-                  <EditVideoModal 
+                  <EditVideoModal
                         isOpen={isEditModalOpen}
                         onClose={() => setIsEditModalOpen(false)}
                         videoData={selectedVideo}
