@@ -8,6 +8,11 @@
       /* horizontal scrollbar height */
 }
 
+/* index.css */
+html {
+      scroll-behavior: smooth;
+}
+
 /* Track */
 .custom-scrollbar::-webkit-scrollbar-track {
       background: transparent;
@@ -28,4 +33,4 @@
 /* Prevent scroll in main content area when modal is open */
 body.modal-open div.flex-1.overflow-auto {
       overflow: hidden !important;
-}
+}
