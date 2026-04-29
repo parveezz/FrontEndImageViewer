@@ -1,115 +1,134 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Play, Shield, Database, Menu, Mail, Phone, MapPin, Users, Settings, Eye } from "lucide-react";
 
+import {
+      Play,
+      Shield,
+      Database,
+      Users,
+      Settings,
+      Eye,
+      UserPlus,
+      LogIn,
+      ArrowRight,
+      Mail,
+      Globe
+} from "lucide-react";
 const Landing = () => {
       const currentYear = new Date().getFullYear();
 
       return (
             <div className="min-h-screen bg-gray-950 text-gray-100 scroll-smooth">
-                  {/* Header */}
+                  {/* Header (Kept simple) */}
                   <header className="w-full border-b border-white/5 bg-gray-950/90 backdrop-blur sticky top-0 z-50">
                         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-                              <div
-                                    className="flex items-center gap-3 cursor-pointer"
-                                    onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-                              >
-                                    <div className="w-10 h-10 rounded-2xl bg-gradient-to-r from-indigo-500 to-purple-500 flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-indigo-500/20">
+                              {/* Logo Section */}
+                              <div className="flex items-center gap-3">
+                                    <div className="w-10 h-10 rounded-2xl bg-indigo-500 flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-indigo-500/20">
                                           M
                                     </div>
-                                    <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
-                                          MediaManager <span className="text-xs uppercase tracking-widest text-indigo-400 ml-2 border border-indigo-400/30 px-2 py-0.5 rounded">Admin</span>
+                                    <h1 className="text-2xl font-bold text-white tracking-tight">
+                                          MediaManager
                                     </h1>
                               </div>
 
-                              <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
-                                    <a href="#features" className="text-gray-400 hover:text-white transition">Features</a>
-                                    <a href="#management" className="text-gray-400 hover:text-white transition">Capabilities</a>
-                                    <a href="#contact" className="text-gray-400 hover:text-white transition">Support</a>
-                              </nav>
-
-                              <div className="hidden md:flex items-center gap-3">
+                              {/* Login Button */}
+                              <div className="flex items-center">
                                     <Link
                                           to="/login"
-                                          className="px-5 py-2 rounded-xl border border-indigo-500/50 text-white bg-indigo-500/10 animate-ring-pulse transition-all duration-300 hover:bg-indigo-500 hover:text-white"
+                                          className="px-6 py-2 rounded-xl border border-white/10 text-sm font-semibold text-gray-300 hover:text-white bg-blue-600 hover:bg-white/5 hover:border-white/20 transition-all duration-200 active:scale-95"
                                     >
-                                          Admin Login
+                                          Sign In
                                     </Link>
                               </div>
                         </div>
                   </header>
 
                   {/* Hero Section */}
-                  <section className="max-w-7xl mx-auto px-6 py-20 grid lg:grid-cols-2 gap-14 items-center">
+                  <section className="max-w-7xl mx-auto px-6 py-20 text-center lg:text-left grid lg:grid-cols-2 gap-12 items-center">
                         <div>
-                              <span className="inline-block px-4 py-2 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 font-medium mb-6">
-                                    Complete Administrative Control
-                              </span>
                               <h2 className="text-5xl md:text-7xl font-extrabold leading-tight mb-6 text-white">
-                                    Master Your <span className="text-indigo-500">Infrastructure</span>
+                                    Unified <span className="text-indigo-500">Media</span> Governance.
                               </h2>
                               <p className="text-lg text-gray-400 leading-relaxed mb-8 max-w-xl">
-                                    The ultimate command center for administrators. Manage users, monitor storage, and moderate media assets across your entire organization from one centralized portal.
+                                    A high-performance administrative engine designed to manage vast digital asset libraries with precision and scale.
                               </p>
-                              <div className="flex flex-wrap gap-4">
-                                    <Link to="/login" className="px-8 py-4 rounded-2xl bg-white text-black font-bold hover:bg-gray-200 transition shadow-xl shadow-white/5">
-                                          Enter Admin Portal
-                                    </Link>
-                              </div>
                         </div>
 
-                        <div className="relative">
-                              <div className="absolute -inset-4 bg-indigo-500/20 blur-3xl rounded-full"></div>
-                              <div className="relative rounded-3xl bg-white/5 border border-white/10 p-8 shadow-2xl backdrop-blur-sm">
-                                    <div className="bg-gray-900 rounded-2xl p-6 space-y-6 border border-white/5">
-                                          <div className="flex items-center justify-between">
-                                                <h3 className="font-bold text-lg text-white flex items-center gap-2">
-                                                      <Settings size={18} className="text-indigo-400" /> Admin Console
-                                                </h3>
-                                                <span className="flex items-center gap-2 text-[10px] text-indigo-400 font-bold uppercase tracking-tighter">
-                                                      System Status: Optimal
-                                                </span>
+                        {/* Right side visual remains the same as your design */}
+                        <div className="relative rounded-3xl bg-white/5 border border-white/10 p-8 shadow-2xl backdrop-blur-sm">
+                              <div className="bg-gray-900 rounded-2xl p-6 border border-white/5">
+                                    <div className="flex justify-between mb-4">
+                                          <span className="text-indigo-400 font-bold text-xs uppercase">System Live</span>
+                                          <Settings size={16} className="text-gray-500" />
+                                    </div>
+                                    <div className="space-y-4">
+                                          <div className="h-2 w-full bg-gray-800 rounded-full overflow-hidden">
+                                                <div className="h-full bg-indigo-500 w-[78%]"></div>
                                           </div>
-                                          <div className="grid grid-cols-2 gap-4">
-                                                <div className="p-4 rounded-xl bg-indigo-500/5 border border-indigo-500/20">
-                                                      <p className="text-sm text-gray-500">Total Users</p>
-                                                      <p className="text-2xl font-bold text-white">4,281</p>
-                                                </div>
-                                                <div className="p-4 rounded-xl bg-purple-500/5 border border-purple-500/20">
-                                                      <p className="text-sm text-gray-500">Storage Used</p>
-                                                      <p className="text-2xl font-bold text-white">1.4 TB</p>
-                                                </div>
-                                          </div>
-                                          <div className="space-y-2">
-                                                <div className="h-2 w-full bg-gray-800 rounded-full overflow-hidden">
-                                                      <div className="h-full bg-indigo-500 w-[65%]"></div>
-                                                </div>
-                                                <p className="text-[10px] text-gray-500 text-right">Bandwidth usage: 65%</p>
+                                          <div className="grid grid-cols-2 gap-4 pt-2">
+                                                <div className="text-xl font-bold">12.8k <span className="block text-[10px] text-gray-500 uppercase">Requests</span></div>
+                                                <div className="text-xl font-bold">99.9% <span className="block text-[10px] text-gray-500 uppercase">Uptime</span></div>
                                           </div>
                                     </div>
                               </div>
                         </div>
                   </section>
 
-                  {/* Management Breakdown */}
-                  <section id="management" className="bg-gray-900/50 py-24 border-y border-white/5">
-                        <div className="max-w-7xl mx-auto px-6">
-                              <div className="text-center mb-16">
-                                    <h3 className="text-4xl font-bold mb-4">Centralized Governance</h3>
-                                    <p className="text-gray-400 text-lg">Four core modules to manage every aspect of your digital ecosystem.</p>
+                  {/* --- PROACTIVE ACTION SECTION (The "Body" focus) --- */}
+                  <section className="max-w-7xl mx-auto px-6 py-12">
+                        <div className="grid md:grid-cols-2 gap-8">
+
+                              {/* Option A: Registration (Proactive "Poke") */}
+                              <div className="group relative p-8 rounded-3xl bg-gradient-to-br from-indigo-600/20 to-purple-600/10 border border-indigo-500/20 hover:border-indigo-500/50 transition-all duration-300 overflow-hidden">
+                                    <div className="relative z-10">
+                                          <div className="w-12 h-12 rounded-2xl bg-indigo-500 flex items-center justify-center mb-6 shadow-lg shadow-indigo-500/20">
+                                                <UserPlus className="text-white" size={24} />
+                                          </div>
+                                          <h3 className="text-2xl font-bold text-white mb-3">New Administrator?</h3>
+                                          <p className="text-gray-400 mb-8 leading-relaxed">
+                                                Start your 14-day administrative trial. Gain access to the full suite of management tools and API integrations.
+                                          </p>
+                                          <Link to="/register" className="inline-flex items-center gap-2 px-6 py-3 bg-indigo-500 hover:bg-indigo-400 text-white font-bold rounded-xl transition-all group-hover:translate-x-1">
+                                                Create Account <ArrowRight size={18} />
+                                          </Link>
+                                    </div>
+                                    {/* Background Blur Effect */}
+                                    <div className="absolute top-0 right-0 -mr-16 -mt-16 w-48 h-48 bg-indigo-500/10 rounded-full blur-3xl group-hover:bg-indigo-500/20 transition-colors"></div>
                               </div>
+
+                              {/* Option B: Login */}
+                              <div className="group p-8 rounded-3xl bg-white/[0.03] border border-white/10 hover:border-white/20 transition-all duration-300">
+                                    <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center mb-6">
+                                          <LogIn className="text-gray-300" size={24} />
+                                    </div>
+                                    <h3 className="text-2xl font-bold text-white mb-3">Existing Admin</h3>
+                                    <p className="text-gray-400 mb-8 leading-relaxed">
+                                          Welcome back. Access your workspace to monitor system logs, manage user permissions, and review pending assets.
+                                    </p>
+                                    <Link to="/login" className="inline-flex items-center gap-2 px-6 py-3 border border-white/20 hover:bg-white/10 text-white font-bold rounded-xl transition-all">
+                                          Sign In to Portal
+                                    </Link>
+                              </div>
+
+                        </div>
+                  </section>
+
+                  {/* Management Breakdown (Visual Cards) */}
+                  <section id="management" className="py-24">
+                        <div className="max-w-7xl mx-auto px-6">
                               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                                     {[
-                                          { title: "User Management", desc: "Control permissions, roles, and account security settings.", icon: Users, color: "from-blue-500/20" },
-                                          { title: "Video Libraries", desc: "Oversee massive video archives with automated transcoding.", icon: Play, color: "from-red-500/20" },
-                                          { title: "Audio Assets", desc: "Manage high-fidelity audio catalogs and streaming metadata.", icon: Database, color: "from-green-500/20" },
-                                          { title: "Image Gallery", desc: "Moderate user uploads and manage global image assets.", icon: Eye, color: "from-orange-500/20" }
+                                          { title: "Users", desc: "Global role management.", icon: Users, color: "from-blue-500/20" },
+                                          { title: "Video", desc: "Automated transcoding.", icon: Play, color: "from-red-500/20" },
+                                          { title: "Audio", desc: "Streaming metadata.", icon: Database, color: "from-green-500/20" },
+                                          { title: "Images", desc: "Asset moderation.", icon: Eye, color: "from-orange-500/20" }
                                     ].map((item, i) => (
-                                          <div key={i} className={`bg-gradient-to-b ${item.color} to-transparent p-1 rounded-3xl`}>
+                                          <div key={i} className={`bg-gradient-to-b ${item.color} to-transparent p-[1px] rounded-3xl`}>
                                                 <div className="bg-gray-950 p-6 rounded-[calc(1.5rem-1px)] h-full border border-white/5">
-                                                      <item.icon className="mb-4 text-white" size={24} />
-                                                      <h4 className="font-bold text-xl mb-2 text-white">{item.title}</h4>
-                                                      <p className="text-sm text-gray-400 leading-relaxed">{item.desc}</p>
+                                                      <item.icon className="mb-4 text-white/70" size={20} />
+                                                      <h4 className="font-bold text-lg mb-1 text-white">{item.title}</h4>
+                                                      <p className="text-xs text-gray-500">{item.desc}</p>
                                                 </div>
                                           </div>
                                     ))}
@@ -117,48 +136,71 @@ const Landing = () => {
                         </div>
                   </section>
 
-                  {/* Admin Specific Features */}
-                  <section id="features" className="py-24">
-                        <div className="max-w-7xl mx-auto px-6">
-                              <div className="grid md:grid-cols-3 gap-12">
-                                    <div className="flex flex-col items-center text-center">
-                                          <div className="w-16 h-16 rounded-2xl bg-indigo-500/10 flex items-center justify-center mb-6">
-                                                <Shield className="text-indigo-500" size={30} />
-                                          </div>
-                                          <h4 className="text-xl font-bold mb-3">RBAC Security</h4>
-                                          <p className="text-gray-400">Role-Based Access Control ensures users only see what they are authorized to manage.</p>
-                                    </div>
-                                    <div className="flex flex-col items-center text-center">
-                                          <div className="w-16 h-16 rounded-2xl bg-purple-500/10 flex items-center justify-center mb-6">
-                                                <Database className="text-purple-500" size={30} />
-                                          </div>
-                                          <h4 className="text-xl font-bold mb-3">Real-time Analytics</h4>
-                                          <p className="text-gray-400">Track upload volume, user activity, and system health from a single live dashboard.</p>
-                                    </div>
-                                    <div className="flex flex-col items-center text-center">
-                                          <div className="w-16 h-16 rounded-2xl bg-pink-500/10 flex items-center justify-center mb-6">
-                                                <Settings className="text-pink-500" size={30} />
-                                          </div>
-                                          <h4 className="text-xl font-bold mb-3">Bulk Operations</h4>
-                                          <p className="text-gray-400">Perform mass actions on users or media files to keep your library clean and efficient.</p>
-                                    </div>
-                              </div>
-                        </div>
-                  </section>
-
                   {/* Footer */}
-                  <footer className="py-12 text-center border-t border-white/5 bg-gray-950">
-                        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-                              <div className="flex items-center gap-2 font-bold text-white">
-                                    <div className="w-6 h-6 rounded-lg bg-indigo-500 flex items-center justify-center text-[10px]">M</div>
-                                    MediaManager Admin
+                  <footer className="bg-gray-950 border-t border-white/5 pt-16 pb-8">
+                        <div className="max-w-7xl mx-auto px-6">
+                              <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+
+                                    {/* Brand Column */}
+                                    <div className="col-span-1 md:col-span-1">
+                                          <div className="flex items-center gap-3 mb-4">
+                                                <div className="w-8 h-8 rounded-xl bg-indigo-500 flex items-center justify-center text-white font-bold text-sm">M</div>
+                                                <span className="text-xl font-bold text-white tracking-tight">MediaManager</span>
+                                          </div>
+                                          <p className="text-gray-500 text-sm leading-relaxed">
+                                                Advanced media governance for enterprise-scale infrastructure. Secure, scalable, and centralized.
+                                          </p>
+                                    </div>
+
+                                    {/* Quick Links */}
+                                    <div>
+                                          <h4 className="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Resources</h4>
+                                          <ul className="space-y-2 text-sm text-gray-500">
+                                                <li><a href="#features" className="hover:text-indigo-400 transition-colors">Documentation</a></li>
+                                                <li><a href="#management" className="hover:text-indigo-400 transition-colors">API Reference</a></li>
+                                                <li><Link to="/login" className="hover:text-indigo-400 transition-colors">Admin Portal</Link></li>
+                                          </ul>
+                                    </div>
+
+                                    {/* Support */}
+                                    <div>
+                                          <h4 className="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Support</h4>
+                                          <ul className="space-y-2 text-sm text-gray-500">
+                                                <li className="flex items-center gap-2 hover:text-gray-300 transition-colors cursor-pointer">
+                                                      <Mail size={14} /> support@mediamanager.io
+                                                </li>
+                                                <li className="flex items-center gap-2 hover:text-gray-300 transition-colors cursor-pointer">
+                                                      <Shield size={14} /> Security Whitepaper
+                                                </li>
+                                          </ul>
+                                    </div>
+
+                                    {/* System Status (The "Pro" Touch) */}
+                                    <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-4">
+                                          <div className="flex items-center justify-between mb-2">
+                                                <span className="text-xs font-medium text-gray-400 uppercase">System Status</span>
+                                                <span className="flex h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)]"></span>
+                                          </div>
+                                          <div className="text-lg font-bold text-white">All Systems Operational</div>
+                                          <p className="text-[10px] text-gray-600 mt-1 uppercase tracking-tighter">Last Checked: Just Now</p>
+                                    </div>
                               </div>
-                              <p className="text-gray-600 text-sm italic">
-                                    Secure Administration Interface — Unauthorized Access Prohibited
-                              </p>
-                              <p className="text-gray-600 text-sm">
-                                    © {currentYear} All rights reserved.
-                              </p>
+
+                              {/* Bottom Bar */}
+                              <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
+                                    <div className="flex items-center gap-6 text-xs text-gray-600">
+                                          <p>© {currentYear} MediaManager — Enterprise Administration</p>
+                                          <a href="#" className="hover:text-gray-400 transition-colors">Privacy Policy</a>
+                                          <a href="#" className="hover:text-gray-400 transition-colors">Terms of Service</a>
+                                    </div>
+
+                                    {/* Socials / Github */}
+                                    <div className="flex items-center gap-4 text-gray-500">
+                                          <div className="p-2 rounded-lg hover:bg-white/5 hover:text-white transition-all cursor-pointer border border-transparent hover:border-white/10">
+                                                <Settings size={18} />
+                                          </div>
+                                    </div>
+                              </div>
                         </div>
                   </footer>
             </div>

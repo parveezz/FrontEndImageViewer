@@ -64,3 +64,10 @@ body.modal-open div.flex-1.overflow-auto {
       color: white;
       box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.4);
 }
+
+body {
+      font-family: 'Inter', sans-serif;
+      /* Optional: Standardizes character rendering */
+      font-feature-settings: 'cv11', 'ss01';
+      -webkit-font-smoothing: antialiased;
+}
