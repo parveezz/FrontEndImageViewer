@@ -29,14 +29,15 @@ const Login = () => {
                   });
 
                   const response = await fetching.json();
-
                   if (!fetching.ok || !response.success) {
                         toast.error(response.message || "Login Failed");
                         return;
                   }
 
-                  localStorage.setItem("BearerToken", response.token);
-                  if (response.user) localStorage.setItem("UserData", JSON.stringify(response.user));
+                  localStorage.setItem("BearerToken", response.data.token);
+                  if (response.data) { localStorage.setItem("UserData", JSON.stringify(response.data)) };
+
+
 
                   toast.success("Login Successfully");
                   navigate("/dashboard");

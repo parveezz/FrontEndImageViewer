@@ -1,38 +1,95 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../../Layouts/Shared/Header";
 import StatCard from "./StatCard";
 import { Image, Video, Music, HardDrive, Search, ListFilter } from "lucide-react";
 import TableComponent from "./TableComponent";
 import FilterDropdown from "../Shared/FilterDropdown";
+import { toast, Toaster } from "sonner";
+import { BaseUrl } from "../../BaseUrl";
 
 const Dashboard = () => {
+      const [recentUploads, setRecentlyUploads] = useState([]);
+      const [total, setTotal] = useState({
+            images: 0,
+            videos: 0,
+            audio: 0,
+            size: 0
+      })
       const [isFilterOpen, setIsFilterOpen] = useState(false);
+      let token = localStorage.getItem("BearerToken");
+
+      useEffect(() => {
+            if (!token) return;
+
+            const fetchingDashboard = async () => {
+                  const url = `${BaseUrl}/api/dashboard/overview`;
+
+                  try {
+                        const response = await fetch(url, {
+                              method: "GET",
+                              headers: {
+                                    Authorization: `Bearer ${token}`,
+                                    "Content-Type": "application/json",
+                              },
+                        });
+
+                        const data = await response.json();
+
+                        if (!response.ok || !data.success) {
+                              return toast.error(data.message || "Failed to Load Dashboard");
+                        }
+
+
+                        setRecentlyUploads(data.data.recentUploads);
+
+                        setTotal({
+                              images: data.data.totals.images,
+                              videos: data.data.totals.videos,
+                              audio: data.data.totals.audio,
+                              size: data.data.totals.size,
+                        });
+
+                  } catch (e) {
+                        toast.error(e.message);
+                  }
+            };
+
+            fetchingDashboard();
+
+      }, [token]);
+
+      const formatFileSize = (bytes) => {
+            if (!bytes || bytes <= 0) return "0 MB";
+            return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
+      };
+
       const stats = [
             {
                   title: "Total Images",
-                  value: "1,248",
+                  value: total.images,
                   icon: Image,
                   color: "bg-red-100 text-red-500",
             },
             {
                   title: "Total Videos",
-                  value: "342",
+                  value: total.videos,
                   icon: Video,
                   color: "bg-blue-100 text-blue-500",
             },
             {
                   title: "Total Audio",
-                  value: "891",
+                  value: total.audio,
                   icon: Music,
                   color: "bg-purple-100 text-purple-500",
             },
             {
                   title: "Storage Used",
-                  value: "42.8 GB",
+                  value: formatFileSize(total.size),
                   icon: HardDrive,
                   color: "bg-green-100 text-green-500",
             },
       ];
+
       return (
             <>
                   <Header heading={" DashBoard"} />
@@ -95,7 +152,7 @@ const Dashboard = () => {
                   </div>
 
                   {/* Table of Recent Uploads */}
-                  <TableComponent />
+                  <TableComponent recentUploads={recentUploads} />
             </>
       );
 };
