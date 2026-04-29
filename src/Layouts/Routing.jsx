@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
-import User from "../Components/Users/User";
+import User from "../Components/Users/User"
 import Dashboard from "../Components/DashboardComponent/Dashboard";
 import Login from "../Components/Login&Landing/Login";
 import Register from "../Components/Login&Landing/Register"
