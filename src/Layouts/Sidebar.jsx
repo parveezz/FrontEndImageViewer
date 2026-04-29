@@ -10,7 +10,7 @@ import {
 
 const Sidebar = () => {
       const navLinks = [
-            { name: "Dashboard", path: "/", icon: LayoutDashboard },
+            { name: "Dashboard", path: "/dashboard", icon: LayoutDashboard },
             { name: "Users", path: "/user", icon: User },
             { name: "Images", path: "/images", icon: Image },
             { name: "Videos", path: "/videos", icon: Video },

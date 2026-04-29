@@ -1,7 +1,16 @@
 import { LogOut } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Header = () => {
+      const logout = useNavigate();
+
+
+      const removingToken = () => {
+            localStorage.removeItem("BearerToken")
+            return logout("/login")
+      }
+
+
       return (
             <header className="w-full flex justify-between items-center bg-[#5751531c] py-2 px-6">
                   <div>
@@ -20,6 +29,8 @@ const Header = () => {
                               className="cursor-pointer transition hover:bg-gray-200 p-2 border rounded-3xl
                               flex items-center justify-center "
                               title="Logout"
+
+                              onClick={removingToken}
                         >
                               <LogOut size={18} />
                         </button>
