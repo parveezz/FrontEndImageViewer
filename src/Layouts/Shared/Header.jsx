@@ -1,12 +1,13 @@
 import { LogOut } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 
-const Header = ({ heading }) => {
+const Header = ({ heading, subtitle }) => {
       const navigate = useNavigate();
 
       // Correctly get stored user data
       const userData = JSON.parse(localStorage.getItem("UserData")) || {};
-      const userName = userData.name || "Admin";
+      const userName = userData.name;
+      console.log(userName)
 
       const removingToken = () => {
             localStorage.removeItem("BearerToken");
@@ -24,7 +25,7 @@ const Header = ({ heading }) => {
                         </h2>
 
                         <p className="font-medium text-sm tracking-wide">
-                              Welcome back, {userName}!
+                              {subtitle}
                         </p>
                   </div>
 

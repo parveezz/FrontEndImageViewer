@@ -92,7 +92,9 @@ const Dashboard = () => {
 
       return (
             <>
-                  <Header heading={" DashBoard"} />
+                  <Header heading={" DashBoard"}
+                        subtitle={"welcome to admin dashboard"}
+                  />
 
                   {/* Stats Card */}
                   <div className="w-full bg-[#5751531c] p-4">

@@ -5,7 +5,10 @@ import ImagesTable from './ImagesTable'
 const Images = () => {
       return (
             <>
-                  <Header heading={"Images Dashboard"} />
+                  <Header
+                        heading={"Admin Dashboard Image Management"}
+                        subtitle={"Upload, organize, and manage dashboard images."}
+                  />
                   <ImagesPage />
             </>
       )

@@ -37,13 +37,12 @@ const Videos = () => {
 
       return (
             <div className="min-h-screen bg-[#5751531c]">
-                  <Header heading={"Videos Dashboard"} />
+                  <Header
+                        heading={"Videos Dashboard"}
+                        subtitle={"Upload, manage, and organize video content."}
+                  />
                   <div className="p-6">
-                        {/* Header Section */}
-                        <div className="mb-8">
-                              <h1 className="text-2xl font-bold text-gray-900">Video Library</h1>
-                              <p className="text-sm text-gray-500 mt-1">Upload, edit, and organize your video content library.</p>
-                        </div>
+
 
                         {/* Actions Section */}
                         <div className="flex items-center justify-between mb-6">

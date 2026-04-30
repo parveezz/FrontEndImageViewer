@@ -37,12 +37,11 @@ const Audio = () => {
 
       return (
             <div className="min-h-screen bg-[#5751531c]">
-                  <Header heading={"Audio Board"} />
+                  <Header
+                        heading={"Audio Board"}
+                        subtitle={"Upload, manage, and organize audio content."}
+                  />
                   <div className="p-6">
-                        <div className="mb-8">
-                              <h1 className="text-2xl font-bold text-gray-900">Audio Library</h1>
-                              <p className="text-sm text-gray-500 mt-1">Manage and organize your audio tracks, podcasts, and sound library.</p>
-                        </div>
 
                         <div className="flex items-center justify-between mb-6">
                               <div className="relative group">
